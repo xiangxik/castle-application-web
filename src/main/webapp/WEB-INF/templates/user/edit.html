@@ -1,0 +1,679 @@
+<!doctype html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<!--[if lte IE 9]> <html class="lte-ie9 app_theme_f" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!-->
+<html lang="en" class="app_theme_f" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<!--<![endif]-->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="msapplication-tap-highlight" content="no" />
+
+<link rel="icon" type="image/png" th:href="@{/assets/img/favicon-16x16.png}" sizes="16x16">
+<link rel="icon" type="image/png" th:href="@{/assets/img/favicon-32x32.png}" sizes="32x32">
+
+<title>Altair Admin v2.11.0</title>
+
+<!-- uikit -->
+<link rel="stylesheet" th:href="@{/bower_components/uikit/css/uikit.almost-flat.min.css}" media="all">
+
+<!-- flag icons -->
+<link rel="stylesheet" th:href="@{/assets/uikit/css/flags.min.css}" media="all">
+
+<!-- altair admin -->
+<link rel="stylesheet" th:href="@{/assets/uikit/css/main.min.css}" media="all">
+
+<!-- themes -->
+<link rel="stylesheet" th:href="@{/assets/uikit/css/themes/themes_combined.min.css}" media="all">
+
+<!-- matchMedia polyfill for testing media queries in JS -->
+<!--[if lte IE 9]>
+        <script type="text/javascript" th:src="@{/bower_components/matchMedia/matchMedia.js}"></script>
+        <script type="text/javascript" th:src="@{/bower_components/matchMedia/matchMedia.addListener.js}"></script>
+        <link rel="stylesheet" th:href="@{/assets/uikit/css/ie.css}" media="all">
+    <![endif]-->
+</head>
+
+<body class="disable_transitions sidebar_main_open sidebar_main_swipe">
+	<!-- main header -->
+	<div th:replace="/layout/header :: main"></div>
+	<!-- main header end -->
+
+	<!-- main sidebar -->
+	<div th:replace="/layout/sidebar :: main('system_user')"></div>
+	<!-- main sidebar end -->
+
+	<div id="page_content">
+		<div id="page_content_inner">
+
+			<form th:action="@{/user/save}" class="uk-form-stacked" id="main_form" th:object="${entity}" method="post">
+				<input type="hidden" th:field="*{id}" />
+				<div class="uk-grid" data-uk-grid-margin>
+					<div class="uk-width-large-7-10">
+						<div class="md-card">
+							<div class="user_heading" data-uk-sticky="{ top: 48, media: 960 }">
+								<div class="user_heading_avatar fileinput fileinput-new" data-provides="fileinput">
+									<div class="fileinput-new thumbnail">
+										<img src="http://altair_html.tzdthemes.com/assets/img/avatars/user.png" alt="user avatar" />
+									</div>
+									<div class="fileinput-preview fileinput-exists thumbnail"></div>
+									<div class="user_avatar_controls">
+										<span class="btn-file"> <span class="fileinput-new"><i class="material-icons">&#xE2C6;</i></span> <span
+											class="fileinput-exists"><i class="material-icons">&#xE86A;</i></span> <input type="file"
+											name="user_edit_avatar_control" id="user_edit_avatar_control">
+										</span> <a href="#" class="btn-file fileinput-exists" data-dismiss="fileinput"><i class="material-icons">&#xE5CD;</i></a>
+									</div>
+								</div>
+								<div class="user_heading_content">
+									<h2 class="heading_b">
+										<span class="uk-text-truncate" id="user_edit_name" th:text="*{name}">name</span><span class="sub-heading"
+											id="user_edit_username" th:text="*{username}"></span>
+									</h2>
+								</div>
+								<div class="md-fab-wrapper">
+									<div class="md-fab md-fab-toolbar md-fab-small md-fab-accent">
+										<i class="material-icons">&#xE8BE;</i>
+										<div class="md-fab-toolbar-actions">
+											<button type="submit" id="button_save" data-uk-tooltip="{cls:'uk-tooltip-small',pos:'bottom'}" title="保存">
+												<i class="material-icons md-color-white">&#xE161;</i>
+											</button>
+											<button type="button" id="button_print" data-uk-tooltip="{cls:'uk-tooltip-small',pos:'bottom'}" title="打印">
+												<i class="material-icons md-color-white">&#xE555;</i>
+											</button>
+											<button type="button" id="button_delete" data-uk-tooltip="{cls:'uk-tooltip-small',pos:'bottom'}" title="删除">
+												<i class="material-icons md-color-white">&#xE872;</i>
+											</button>
+											<button type="button" id="button_delete" data-uk-tooltip="{cls:'uk-tooltip-small',pos:'bottom'}" title="返回"
+												onclick="location.href=base+'/user'">
+												<i class="material-icons md-color-white">&#xE52E;</i>
+											</button>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="user_content">
+								<ul id="user_edit_tabs" class="uk-tab" data-uk-tab="{connect:'#user_edit_tabs_content'}">
+									<li class="uk-active"><a href="#">信息</a></li>
+									<li><a href="#">用户组</a></li>
+									<li><a href="#">权限</a></li>
+								</ul>
+								<ul id="user_edit_tabs_content" class="uk-switcher uk-margin">
+									<li>
+										<div class="uk-margin-top">
+											<h3 class="full_width_in_card heading_c">基本信息</h3>
+											<div class="uk-grid">
+												<div class="uk-width-medium-1-2">
+													<div class="parsley-row">
+														<label for="input_name">姓名<span class="req">*</span></label> <input class="md-input" type="text"
+															id="input_name" th:field="*{name}" required />
+													</div>
+												</div>
+												<div class="uk-width-medium-1-2">
+													<div class="parsley-row">
+														<label for="input_username">账号<span class="req">*</span></label> <input class="md-input" type="text"
+															id="input_username" th:field="*{username}" required />
+													</div>
+												</div>
+											</div>
+											<div class="uk-grid">
+												<div class="uk-width-medium-1-2">
+													<label for="input_new_password">密码</label> <input class="md-input" type="password" id="input_new_password"
+														name="newPassword" />
+												</div>
+												<div class="uk-width-medium-1-2">
+													<label for="input_repeat_password">重复密码</label> <input class="md-input" type="password"
+														id="input_repeat_password" name="repeatPassword" />
+												</div>
+											</div>
+											<div class="uk-grid">
+												<div class="uk-width-1-1">
+													<label for="user_edit_personal_info_control">关于</label>
+													<textarea class="md-input" name="user_edit_personal_info_control" id="user_edit_personal_info_control"
+														cols="30" rows="4"></textarea>
+												</div>
+											</div>
+											<h3 class="full_width_in_card heading_c">联系信息</h3>
+											<div class="uk-grid">
+												<div class="uk-width-1-1">
+													<div class="uk-grid uk-grid-width-1-1 uk-grid-width-large-1-2" data-uk-grid-margin>
+														<div>
+															<div class="uk-input-group">
+																<span class="uk-input-group-addon"> <i class="md-list-addon-icon material-icons">&#xE158;</i>
+																</span> <label>邮箱</label> <input type="text" class="md-input" th:field="*{email}" />
+															</div>
+														</div>
+														<div>
+															<div class="uk-input-group">
+																<span class="uk-input-group-addon"> <i class="md-list-addon-icon material-icons">&#xE0CD;</i>
+																</span> <label>联系电话</label> <input type="text" class="md-input" th:field="*{mobile}" />
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</li>
+									<li>
+										<p class="uk-text-muted uk-text-small">Move the draggable group by clicking and holding handler and drag
+											it to other list.</p>
+										<div class="uk-grid" data-uk-grid-margin>
+											<div class="uk-width-medium-1-2">
+												<h4 class="heading_c uk-margin-small-bottom">My groups</h4>
+												<ul class="md-list md-list-addon uk-sortable groups_connected" id="user_groups">
+													<li data-group-id="1">
+														<div class="md-list-addon-element sortable-handler">
+															<i class="md-list-addon-icon material-icons">&#xE5D2;</i>
+														</div>
+														<div class="md-list-content">
+															<span class="md-list-heading"><a href="#">Cloud Computing</a></span> <span
+																class="uk-text-small uk-text-muted">117 Members</span>
+														</div>
+													</li>
+													<li data-group-id="2">
+														<div class="md-list-addon-element sortable-handler">
+															<i class="md-list-addon-icon material-icons">&#xE5D2;</i>
+														</div>
+														<div class="md-list-content">
+															<span class="md-list-heading"><a href="#">Account Manager Group</a></span> <span
+																class="uk-text-small uk-text-muted">240 Members</span>
+														</div>
+													</li>
+													<li data-group-id="3">
+														<div class="md-list-addon-element sortable-handler">
+															<i class="md-list-addon-icon material-icons">&#xE5D2;</i>
+														</div>
+														<div class="md-list-content">
+															<span class="md-list-heading"><a href="#">Digital Marketing</a></span> <span
+																class="uk-text-small uk-text-muted">118 Members</span>
+														</div>
+													</li>
+													<li data-group-id="4">
+														<div class="md-list-addon-element sortable-handler">
+															<i class="md-list-addon-icon material-icons">&#xE5D2;</i>
+														</div>
+														<div class="md-list-content">
+															<span class="md-list-heading"><a href="#">HR Professionals Association - Human Resources</a></span> <span
+																class="uk-text-small uk-text-muted">123 Members</span>
+														</div>
+													</li>
+												</ul>
+											</div>
+											<div class="uk-width-medium-1-2">
+												<h4 class="heading_c uk-margin-small-bottom">All Groups</h4>
+												<ul class="md-list md-list-addon uk-sortable groups_connected" id="all_groups">
+													<li data-group-id="5">
+														<div class="md-list-addon-element sortable-handler">
+															<i class="md-list-addon-icon material-icons">&#xE5D2;</i>
+														</div>
+														<div class="md-list-content">
+															<span class="md-list-heading"><a href="#">Biotech & Pharma Professionals Network</a></span> <span
+																class="uk-text-small uk-text-muted">297 Members</span>
+														</div>
+													</li>
+													<li data-group-id="6">
+														<div class="md-list-addon-element sortable-handler">
+															<i class="md-list-addon-icon material-icons">&#xE5D2;</i>
+														</div>
+														<div class="md-list-content">
+															<span class="md-list-heading"><a href="#">The IT Sales Global Community</a></span> <span
+																class="uk-text-small uk-text-muted">20 Members</span>
+														</div>
+													</li>
+													<li data-group-id="7">
+														<div class="md-list-addon-element sortable-handler">
+															<i class="md-list-addon-icon material-icons">&#xE5D2;</i>
+														</div>
+														<div class="md-list-content">
+															<span class="md-list-heading"><a href="#">Healthcare Executives Network</a></span> <span
+																class="uk-text-small uk-text-muted">27 Members</span>
+														</div>
+													</li>
+													<li data-group-id="8">
+														<div class="md-list-addon-element sortable-handler">
+															<i class="md-list-addon-icon material-icons">&#xE5D2;</i>
+														</div>
+														<div class="md-list-content">
+															<span class="md-list-heading"><a href="#">Luxury & Lifestyle Professionals</a></span> <span
+																class="uk-text-small uk-text-muted">120 Members</span>
+														</div>
+													</li>
+													<li data-group-id="9">
+														<div class="md-list-addon-element sortable-handler">
+															<i class="md-list-addon-icon material-icons">&#xE5D2;</i>
+														</div>
+														<div class="md-list-content">
+															<span class="md-list-heading"><a href="#">Information Security Community</a></span> <span
+																class="uk-text-small uk-text-muted">187 Members</span>
+														</div>
+													</li>
+													<li data-group-id="10">
+														<div class="md-list-addon-element sortable-handler">
+															<i class="md-list-addon-icon material-icons">&#xE5D2;</i>
+														</div>
+														<div class="md-list-content">
+															<span class="md-list-heading"><a href="#">eMarketing Association Network</a></span> <span
+																class="uk-text-small uk-text-muted">254 Members</span>
+														</div>
+													</li>
+													<li data-group-id="11">
+														<div class="md-list-addon-element sortable-handler">
+															<i class="md-list-addon-icon material-icons">&#xE5D2;</i>
+														</div>
+														<div class="md-list-content">
+															<span class="md-list-heading"><a href="#">Finance Club</a></span> <span
+																class="uk-text-small uk-text-muted">103 Members</span>
+														</div>
+													</li>
+													<li data-group-id="12">
+														<div class="md-list-addon-element sortable-handler">
+															<i class="md-list-addon-icon material-icons">&#xE5D2;</i>
+														</div>
+														<div class="md-list-content">
+															<span class="md-list-heading"><a href="#">Banking Careers</a></span> <span
+																class="uk-text-small uk-text-muted">181 Members</span>
+														</div>
+													</li>
+													<li data-group-id="13">
+														<div class="md-list-addon-element sortable-handler">
+															<i class="md-list-addon-icon material-icons">&#xE5D2;</i>
+														</div>
+														<div class="md-list-content">
+															<span class="md-list-heading"><a href="#">Java Developers</a></span> <span
+																class="uk-text-small uk-text-muted">98 Members</span>
+														</div>
+													</li>
+													<li data-group-id="14">
+														<div class="md-list-addon-element sortable-handler">
+															<i class="md-list-addon-icon material-icons">&#xE5D2;</i>
+														</div>
+														<div class="md-list-content">
+															<span class="md-list-heading"><a href="#">Information Technology: Software, Hardware,
+																	Computer, Developer, Cloud & Engineering</a></span> <span class="uk-text-small uk-text-muted">86 Members</span>
+														</div>
+													</li>
+												</ul>
+											</div>
+										</div> <input name="user_groups_control" id="user_groups_control" type="hidden" />
+									</li>
+									<li>
+										<ul class="md-list md-list-addon" id="user_todo">
+											<li>
+												<div class="md-list-addon-element">
+													<input name="todo_item_0" type="checkbox" data-md-icheck />
+												</div>
+												<div class="md-list-content">
+													<span class="md-list-heading">Voluptas cupiditate nam qui.</span> <span class="uk-text-small uk-text-muted">Necessitatibus
+														voluptatem non qui omnis nemo in quasi.</span>
+												</div>
+											</li>
+											<li>
+												<div class="md-list-addon-element">
+													<input name="todo_item_1" type="checkbox" data-md-icheck />
+												</div>
+												<div class="md-list-content">
+													<span class="md-list-heading">Suscipit necessitatibus neque sunt.</span> <span
+														class="uk-text-small uk-text-muted">Eum voluptatibus et et placeat culpa reprehenderit eveniet nam
+														et dolore minus.</span>
+												</div>
+											</li>
+											<li class="md-list-item-disabled">
+												<div class="md-list-addon-element">
+													<input name="todo_item_2" type="checkbox" data-md-icheck checked />
+												</div>
+												<div class="md-list-content">
+													<span class="md-list-heading">Fuga molestias consequatur quia.</span> <span
+														class="uk-text-small uk-text-muted">Esse perspiciatis aperiam voluptas iste sint incidunt
+														reiciendis molestiae reiciendis.</span>
+												</div>
+											</li>
+											<li>
+												<div class="md-list-addon-element">
+													<input name="todo_item_3" type="checkbox" data-md-icheck />
+												</div>
+												<div class="md-list-content">
+													<span class="md-list-heading uk-text-danger">Optio assumenda repudiandae quia est et.</span> <span
+														class="uk-text-small uk-text-danger">Delectus nostrum qui in recusandae et iure quaerat.</span>
+												</div>
+											</li>
+											<li>
+												<div class="md-list-addon-element">
+													<input name="todo_item_4" type="checkbox" data-md-icheck />
+												</div>
+												<div class="md-list-content">
+													<span class="md-list-heading">Voluptates commodi qui ea aliquam.</span> <span
+														class="uk-text-small uk-text-muted">Optio incidunt totam cum aliquid pariatur quia et fugit.</span>
+												</div>
+											</li>
+											<li>
+												<div class="md-list-addon-element">
+													<input name="todo_item_5" type="checkbox" data-md-icheck />
+												</div>
+												<div class="md-list-content">
+													<span class="md-list-heading">Omnis et sint.</span> <span class="uk-text-small uk-text-muted">Deleniti
+														ipsa numquam magnam distinctio sapiente iusto.</span>
+												</div>
+											</li>
+											<li class="md-list-item-disabled">
+												<div class="md-list-addon-element">
+													<input name="todo_item_6" type="checkbox" data-md-icheck checked />
+												</div>
+												<div class="md-list-content">
+													<span class="md-list-heading uk-text-danger">Totam et fuga porro.</span> <span
+														class="uk-text-small uk-text-danger">Sapiente quis cumque quia necessitatibus porro nisi et nemo
+														reprehenderit dolorum sit.</span>
+												</div>
+											</li>
+											<li class="md-list-item-disabled">
+												<div class="md-list-addon-element">
+													<input name="todo_item_7" type="checkbox" data-md-icheck checked />
+												</div>
+												<div class="md-list-content">
+													<span class="md-list-heading">Facere nam quos aut illo.</span> <span class="uk-text-small uk-text-muted">Provident
+														et alias quo est rerum sed.</span>
+												</div>
+											</li>
+											<li>
+												<div class="md-list-addon-element">
+													<input name="todo_item_8" type="checkbox" data-md-icheck />
+												</div>
+												<div class="md-list-content">
+													<span class="md-list-heading">Ut dolores quo qui.</span> <span class="uk-text-small uk-text-muted">Sint
+														corrupti qui eius earum minima ut et saepe.</span>
+												</div>
+											</li>
+											<li>
+												<div class="md-list-addon-element">
+													<input name="todo_item_9" type="checkbox" data-md-icheck />
+												</div>
+												<div class="md-list-content">
+													<span class="md-list-heading">Nostrum et est illum voluptas.</span> <span
+														class="uk-text-small uk-text-muted">Rerum vel quibusdam dignissimos nihil modi quis consectetur
+														omnis.</span>
+												</div>
+											</li>
+											<li>
+												<div class="md-list-addon-element">
+													<input name="todo_item_10" type="checkbox" data-md-icheck />
+												</div>
+												<div class="md-list-content">
+													<span class="md-list-heading">Doloribus sed error placeat.</span> <span class="uk-text-small uk-text-muted">Vitae
+														non quasi veniam sint quod alias unde aut sunt incidunt.</span>
+												</div>
+											</li>
+											<li>
+												<div class="md-list-addon-element">
+													<input name="todo_item_11" type="checkbox" data-md-icheck />
+												</div>
+												<div class="md-list-content">
+													<span class="md-list-heading">Id molestiae nam quo provident.</span> <span
+														class="uk-text-small uk-text-muted">Quia architecto eum quia ut ut magnam.</span>
+												</div>
+											</li>
+											<li>
+												<div class="md-list-addon-element">
+													<input name="todo_item_12" type="checkbox" data-md-icheck />
+												</div>
+												<div class="md-list-content">
+													<span class="md-list-heading uk-text-danger">Assumenda quis voluptates nobis.</span> <span
+														class="uk-text-small uk-text-danger">Qui qui aliquam exercitationem debitis animi asperiores.</span>
+												</div>
+											</li>
+											<li>
+												<div class="md-list-addon-element">
+													<input name="todo_item_13" type="checkbox" data-md-icheck />
+												</div>
+												<div class="md-list-content">
+													<span class="md-list-heading">Quis eligendi nulla corrupti repudiandae officia.</span> <span
+														class="uk-text-small uk-text-muted">Sit quia vel mollitia inventore deserunt consequuntur omnis et.</span>
+												</div>
+											</li>
+											<li>
+												<div class="md-list-addon-element">
+													<input name="todo_item_14" type="checkbox" data-md-icheck />
+												</div>
+												<div class="md-list-content">
+													<span class="md-list-heading">Dignissimos quo praesentium quia.</span> <span
+														class="uk-text-small uk-text-muted">Harum placeat minus velit illum voluptatem ea dolorem eligendi
+														voluptas est.</span>
+												</div>
+											</li>
+											<li class="md-list-item-disabled">
+												<div class="md-list-addon-element">
+													<input name="todo_item_15" type="checkbox" data-md-icheck checked />
+												</div>
+												<div class="md-list-content">
+													<span class="md-list-heading">Dolorum soluta eligendi magnam quisquam.</span> <span
+														class="uk-text-small uk-text-muted">Molestias illo vero expedita fugit quam reiciendis odio.</span>
+												</div>
+											</li>
+											<li>
+												<div class="md-list-addon-element">
+													<input name="todo_item_16" type="checkbox" data-md-icheck />
+												</div>
+												<div class="md-list-content">
+													<span class="md-list-heading">Itaque reiciendis aliquam consequatur.</span> <span
+														class="uk-text-small uk-text-muted">Quia cumque aut magni adipisci hic.</span>
+												</div>
+											</li>
+											<li>
+												<div class="md-list-addon-element">
+													<input name="todo_item_17" type="checkbox" data-md-icheck />
+												</div>
+												<div class="md-list-content">
+													<span class="md-list-heading">Sunt asperiores culpa excepturi aut.</span> <span
+														class="uk-text-small uk-text-muted">Velit ut sit quasi laboriosam accusamus.</span>
+												</div>
+											</li>
+											<li>
+												<div class="md-list-addon-element">
+													<input name="todo_item_18" type="checkbox" data-md-icheck />
+												</div>
+												<div class="md-list-content">
+													<span class="md-list-heading">Assumenda quo cum autem minus.</span> <span
+														class="uk-text-small uk-text-muted">Qui dolore praesentium a reprehenderit dolor libero aspernatur.</span>
+												</div>
+											</li>
+											<li>
+												<div class="md-list-addon-element">
+													<input name="todo_item_19" type="checkbox" data-md-icheck />
+												</div>
+												<div class="md-list-content">
+													<span class="md-list-heading uk-text-danger">Quasi rerum aut eum eos.</span> <span
+														class="uk-text-small uk-text-danger">Quos veritatis similique enim est qui soluta atque
+														consequatur.</span>
+												</div>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="uk-width-large-3-10">
+						<div class="md-card">
+							<div class="md-card-content">
+								<h3 class="heading_c uk-margin-medium-bottom">其他设置</h3>
+								<div class="uk-form-row">
+									<input type="checkbox" data-switchery th:field="*{disabled}" id="input_disabled" /> <label
+										for="input_disabled" class="inline-label">禁用</label>
+								</div>
+								<div class="uk-form-row">
+									<input type="checkbox" data-switchery th:field="*{locked}" id="input_locked" /> <label for="input_locked"
+										class="inline-label">锁定</label>
+								</div>
+								<hr class="md-hr">
+								<div class="uk-form-row">
+									<label class="uk-form-label" for="input_type">用户类型</label> <select id="input_type" data-md-selectize
+										th:field="*{type}">
+										<option value="admin">管理员</option>
+										<option value="superadmin">超级管理员</option>
+										<option value="member">会员</option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</form>
+
+		</div>
+	</div>
+
+	<div th:replace="/layout/footer :: main"></div>
+
+	<script type="text/javascript" th:inline="javascript">
+		var base = /*[[${#httpServletRequest.getContextPath()}]]*/"";
+	</script>
+
+	<!-- common functions -->
+	<script th:src="@{/assets/uikit/js/common.min.js}"></script>
+	<!-- uikit functions -->
+	<script th:src="@{/assets/uikit/js/uikit_custom.min.js}"></script>
+
+	<!-- altair common functions/helpers -->
+	<script th:src="@{/assets/uikit/js/altair_admin_common.js}"></script>
+
+	<script th:src="@{/assets/uikit/js/custom/uikit_fileinput.min.js}"></script>
+
+	<!-- parsley (validation) -->
+	<script>
+		// load parsley config (altair_admin_common.js)
+		altair_forms.parsley_validation_config();
+	</script>
+	<script th:src="@{/bower_components/parsleyjs/dist/parsley.min.js}"></script>
+
+	<script>
+		$(function() {
+			if (isHighDensity()) {
+				$.getScript(base + "/assets/uikit/js/custom/dense.min.js", function(data) {
+					// enable hires images
+					altair_helpers.retina_images();
+				});
+			}
+			if (Modernizr.touch) {
+				// fastClick (touch devices)
+				FastClick.attach(document.body);
+			}
+			var parseQueryString = function(arr_url) {
+				var reg_para = /([^&=]+)=([\w\W]*?)(&|$|#)/g, ret = {};
+				if (arr_url) {
+					var str_para = arr_url, result;
+					while ((result = reg_para.exec(str_para)) != null) {
+						if (result[2]) {
+							ret[result[1]] = decodeURIComponent(result[2]);
+						}
+					}
+				}
+				return ret;
+			};
+
+		});
+		$window.load(function() {
+			// ie fixes
+			altair_helpers.ie_fix();
+		});
+
+		$(function() {
+			// user edit
+			altair_user_edit.init();
+
+			var $mainForm = $('#main_form');
+
+			$mainForm.parsley({
+				'excluded' : 'input[type=button], input[type=submit], input[type=reset], input[type=hidden], .selectize-input > input'
+			}).on('form:validated', function() {
+				altair_md.update_input($mainForm.find('.md-input-danger'));
+			}).on('field:validated', function(parsleyField) {
+				if ($(parsleyField.$element).hasClass('md-input')) {
+					altair_md.update_input($(parsleyField.$element));
+				}
+			}).on('form:submit', function() {
+				$.post($mainForm.attr('action'), $mainForm.serialize(), function(result) {
+					if (result.success) {
+						location.href = base + "/user";
+					} else {
+						alert(result.msg);
+					}
+				}, "json");
+				return false;
+			});
+
+			window.Parsley.on('field:validate', function() {
+				var $server_side_error = $(this.$element).closest('.md-input-wrapper').siblings('.error_server_side');
+				if ($server_side_error) {
+					$server_side_error.hide();
+				}
+			});
+		});
+
+		altair_user_edit = {
+			init : function() {
+				// user edit form
+				altair_user_edit.edit_form();
+				// user groups
+				altair_user_edit.user_groups();
+				// user todo_list
+				altair_user_edit.user_todo();
+			},
+			edit_form : function() {
+				// form variables
+				var $user_edit_form = $('#user_edit_form'), $user_edit_submit_btn = $('#user_edit_submit'), user_name = $('#user_edit_name'), user_name_control = $('#input_name'), user_position = $('#user_edit_username'), user_position_control = $('#input_username');
+
+				user_name_control.val(user_name.text()).on('keyup', function() {
+					user_name.text(user_name_control.val())
+				});
+				altair_md.update_input(user_name_control);
+
+				user_position_control.val(user_position.text()).on('keyup', function() {
+					user_position.text(user_position_control.val())
+				});
+				altair_md.update_input(user_position_control);
+
+				// submit form
+				$user_edit_submit_btn.on('click', function(e) {
+					e.preventDefault();
+					var form_serialized = JSON.stringify($user_edit_form.serializeObject(), null, 2);
+					UIkit.modal.alert('<p>User data:</p><pre>' + form_serialized + '</pre>');
+				})
+			},
+			user_groups : function() {
+
+				var $user_groups = $('#user_groups'), $all_groups = $('#all_groups'), $user_groups_control = $('#user_groups_control'), serialize_user_group = function() {
+					var serialized_data = $user_groups.data("sortable").serialize();
+					$user_groups_control.val(JSON.stringify(serialized_data));
+				};
+
+				var sortable_user_groups = UIkit.sortable($user_groups, {
+					group : '.groups_connected',
+					handleClass : 'sortable-handler'
+				});
+
+				UIkit.sortable($all_groups, {
+					group : '.groups_connected',
+					handleClass : 'sortable-handler'
+				});
+
+				// serialize user group on change
+				$user_groups.on('change.uk.sortable', function() {
+					serialize_user_group();
+				});
+
+				// serialize group on init
+				serialize_user_group();
+
+			},
+			user_todo : function() {
+				var $user_todo = $('#user_todo');
+				$user_todo.find('input:checkbox').on('ifChecked', function() {
+					$(this).closest('li').addClass('md-list-item-disabled');
+				}).on('ifUnchecked', function() {
+					$(this).closest('li').removeClass('md-list-item-disabled');
+				});
+			}
+		};
+	</script>
+
+</body>
+</html>

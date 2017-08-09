@@ -1,0 +1,262 @@
+<!doctype html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<!--[if lte IE 9]> <html class="lte-ie9 app_theme_f" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!-->
+<html lang="en" class="app_theme_f" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<!--<![endif]-->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="msapplication-tap-highlight" content="no" />
+
+<link rel="icon" type="image/png" th:href="@{/assets/img/favicon-16x16.png}" sizes="16x16">
+<link rel="icon" type="image/png" th:href="@{/assets/img/favicon-32x32.png}" sizes="32x32">
+
+<title>文章分类</title>
+
+<!-- fancytree -->
+<link rel="stylesheet" th:href="@{/bower_components/jquery.fancytree/dist/skin-win8/ui.fancytree.min.css}" media="all">
+
+<!-- uikit -->
+<link rel="stylesheet" th:href="@{/bower_components/uikit/css/uikit.almost-flat.min.css}" media="all">
+
+<!-- flag icons -->
+<link rel="stylesheet" th:href="@{/assets/uikit/css/flags.min.css}" media="all">
+
+<!-- altair admin -->
+<link rel="stylesheet" th:href="@{/assets/uikit/css/main.min.css}" media="all">
+
+<!-- themes -->
+<link rel="stylesheet" th:href="@{/assets/uikit/css/themes/themes_combined.min.css}" media="all">
+
+<!-- matchMedia polyfill for testing media queries in JS -->
+<!--[if lte IE 9]>
+        <script type="text/javascript" th:src="@{/bower_components/matchMedia/matchMedia.js}"></script>
+        <script type="text/javascript" th:src="@{/bower_components/matchMedia/matchMedia.addListener.js}"></script>
+        <link rel="stylesheet" th:href="@{/assets/uikit/css/ie.css}" media="all">
+    <![endif]-->
+</head>
+
+<body class="disable_transitions sidebar_main_open sidebar_main_swipe">
+	<!-- main header -->
+	<div th:replace="/layout/header :: main"></div>
+	<!-- main header end -->
+
+	<!-- main sidebar -->
+	<div th:replace="/layout/sidebar :: main('content_articleCategory')"></div>
+	<!-- main sidebar end -->
+
+	<div id="page_content">
+
+		<div id="page_content_inner">
+			<h3 class="heading_b uk-margin-bottom">文章分类</h3>
+
+			<div class="uk-grid uk-grid-medium" data-uk-grid-margin>
+				<div class="uk-width-xLarge-2-10 uk-width-large-3-10">
+					<div class="md-card">
+						<div class="md-card-toolbar">
+							<div class="md-card-toolbar-actions">
+								<a href="javascript:;" id="add-button"><i class="md-icon material-icons">&#xE146;</i></a> <a href="javascript:;"
+									id="delete-button"><i class="md-icon material-icons">delete</i></a>
+							</div>
+							<h3 class="md-card-toolbar-heading-text">分类树</h3>
+						</div>
+						<div class="md-card-content" style="min-height: 320px;">
+							<div id="tree_view"></div>
+						</div>
+					</div>
+				</div>
+				<div class="uk-width-xLarge-8-10  uk-width-large-7-10" id="edit-info">
+					<form th:action="@{/articleCategory/save}" class="uk-form-stacked" id="main_form">
+						<input type="hidden" id="input_id" name="id" />
+						<div class="md-card">
+							<div class="md-card-toolbar">
+								<h3 class="md-card-toolbar-heading-text">分类信息</h3>
+							</div>
+							<div class="md-card-content">
+								<div class="uk-form-row">
+									<label for="input_name">名称</label> <input type="text" class="md-input" id="input_name" name="name" />
+								</div>
+								<div class="uk-form-row">
+									<label for="input_name">上级</label> <input type="hidden" id="input_parent" name="parent" /> <input type="text"
+										class="md-input" id="text_parent" readonly="readonly" />
+								</div>
+								<div class="uk-form-row">
+									<label for="input_sortNo">排序号</label> <input type="text" class="md-input" id="input_sortNo" name="sortNo" />
+								</div>
+
+							</div>
+						</div>
+						<div class="md-fab-wrapper">
+							<button type="submit" class="md-fab md-fab-primary">
+								<i class="material-icons">&#xE161;</i>
+							</button>
+						</div>
+					</form>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+
+	<div th:replace="/layout/footer :: main"></div>
+
+	<script type="text/javascript" th:inline="javascript">
+		var base = /*[[${#httpServletRequest.getContextPath()}]]*/"";
+	</script>
+
+	<!-- common functions -->
+	<script th:src="@{/assets/uikit/js/common.min.js}"></script>
+	<!-- uikit functions -->
+	<script th:src="@{/assets/uikit/js/uikit_custom.min.js}"></script>
+
+	<!-- altair common functions/helpers -->
+	<script th:src="@{/assets/uikit/js/altair_admin_common.js}"></script>
+
+	<!-- jquery ui -->
+	<script th:src="@{/bower_components/jquery-ui/jquery-ui.min.js}"></script>
+	<!-- fancytree -->
+	<script th:src="@{/bower_components/jquery.fancytree/dist/jquery.fancytree-all.min.js}"></script>
+	
+	<!-- parsley (validation) -->
+	<script>
+		// load parsley config (altair_admin_common.js)
+		altair_forms.parsley_validation_config();
+	</script>
+	<script th:src="@{/bower_components/parsleyjs/dist/parsley.min.js}"></script>
+
+	<script>
+		$(function() {
+			if (isHighDensity()) {
+				$.getScript(base + "/assets/uikit/js/custom/dense.min.js", function(data) {
+					// enable hires images
+					altair_helpers.retina_images();
+				});
+			}
+			if (Modernizr.touch) {
+				// fastClick (touch devices)
+				FastClick.attach(document.body);
+			}
+			var parseQueryString = function(arr_url) {
+				var reg_para = /([^&=]+)=([\w\W]*?)(&|$|#)/g, ret = {};
+				if (arr_url) {
+					var str_para = arr_url, result;
+					while ((result = reg_para.exec(str_para)) != null) {
+						if (result[2]) {
+							ret[result[1]] = decodeURIComponent(result[2]);
+						}
+					}
+				}
+				return ret;
+			};
+
+			var $treeView = $("#tree_view");
+
+			var $edit_info = $("#edit-info");
+			var $input_id = $("#input_id");
+			var $input_name = $("#input_name");
+			var $input_parent = $("#input_parent");
+			var $text_parent = $("#text_parent");
+			var $input_sortNo = $("#input_sortNo");
+			var initForm = function(node) {
+				$input_id.val(node.data.id);
+				$input_name.val(node.data.name);
+				if (node.parent.data.id) {
+					$input_parent.val(node.parent.data.id);
+					$text_parent.val(node.parent.data.name);
+				} else {
+					$input_parent.val("");
+					$text_parent.val("");
+				}
+
+				$input_sortNo.val(node.data.sortNo);
+			}
+
+			$treeView.fancytree({
+				source : {
+					url : base + "/articleCategory/tree",
+					method : "post"
+				},
+				activate : function(event, data) {
+					if (data.node) {
+						if (data.node.data.id) {
+							$edit_info.show();
+							initForm(data.node);
+						} else {
+							$edit_info.hide();
+						}
+					}
+				}
+			});
+			$edit_info.hide();
+
+			var $addButton = $("#add-button");
+			$addButton.on("click", function() {
+				var node = $treeView.fancytree("getActiveNode");
+				if (!node) {
+					UIkit.modal.alert('请选择一个节点')
+					return false;
+				}
+				$.post(base + "/articleCategory/addChild", {
+					parent : node.data.id
+				}, function(resp) {
+					node.addChildren(resp).setActive();
+				});
+			});
+			
+			$("#delete-button").on("click", function() {
+				UIkit.modal.confirm('确定要删除吗?', function(){
+					var node = $treeView.fancytree("getActiveNode");
+					if(node.hasChildren()) {
+						UIkit.modal.alert('该分类有子分类，不能删除')
+						return true;
+					}
+					if(node.data.id) {
+						$.post(base + "/articleCategory/delete", {
+							ids : [node.data.id]
+						}, function(resp) {
+							node.remove();
+						});
+					}
+				});
+			});
+			
+			var $mainForm = $('#main_form');
+
+			$mainForm.parsley({
+				'excluded' : 'input[type=button], input[type=submit], input[type=reset], input[type=hidden], .selectize-input > input'
+			}).on('form:validated', function() {
+				altair_md.update_input($mainForm.find('.md-input-danger'));
+			}).on('field:validated', function(parsleyField) {
+				if ($(parsleyField.$element).hasClass('md-input')) {
+					altair_md.update_input($(parsleyField.$element));
+				}
+			}).on('form:submit', function() {
+				$.post($mainForm.attr('action'), $mainForm.serialize(), function(result) {
+					if (result.success) {
+						UIkit.modal.alert("保存成功");
+						$.ui.fancytree.getTree("#tree_view").reload();
+					} else {
+						UIkit.modal.alert(result.msg);
+					}
+				}, "json");
+				return false;
+			});
+
+			window.Parsley.on('field:validate', function() {
+				var $server_side_error = $(this.$element).closest('.md-input-wrapper').siblings('.error_server_side');
+				if ($server_side_error) {
+					$server_side_error.hide();
+				}
+			});
+
+		});
+		$window.load(function() {
+			altair_helpers.ie_fix();
+		});
+	</script>
+
+</body>
+</html>

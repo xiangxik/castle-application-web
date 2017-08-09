@@ -1,0 +1,57 @@
+<!doctype html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<body>
+
+	<aside th:fragment="main(menu)" id="sidebar_main">
+		<div class="sidebar_main_header">
+			<div class="sidebar_logo">
+				<a th:href="@{/}" class="sSidebar_hide sidebar_logo_large"> <img class="logo_regular"
+					src="http://altair_html.tzdthemes.com/assets/img/logo_main.png" alt="" height="15" width="71" /> <img
+					class="logo_light" src="http://altair_html.tzdthemes.com/assets/img/logo_main_white.png" alt="" height="15"
+					width="71" />
+				</a> <a th:href="@{/}" class="sSidebar_show sidebar_logo_small"> <img class="logo_regular"
+					src="http://altair_html.tzdthemes.com/assets/img/logo_main_small.png" alt="" height="32" width="32" /> <img
+					class="logo_light" src="http://altair_html.tzdthemes.com/assets/img/logo_main_small_light.png" alt="" height="32"
+					width="32" />
+				</a>
+			</div>
+			<div class="sidebar_actions">
+				<select id="lang_switcher" name="lang_switcher">
+					<option value="cn" selected>Chinese</option>
+				</select>
+			</div>
+		</div>
+
+		<div class="menu_section">
+			<ul>
+				<li th:classappend="${menu=='dashboard'}?'current_section':''" title="工作台"><a th:href="@{/dashboard}"> <span
+						class="menu_icon"><i class="material-icons">&#xE871;</i></span> <span class="menu_title">工作台</span>
+				</a></li>
+
+				<li title="内容管理"><a href="#"> <span class="menu_icon"><i class="material-icons">&#xE24D;</i></span> <span
+						class="menu_title">内容管理</span>
+				</a>
+					<ul>
+						<li th:classappend="${menu=='content_article'}?'act_item':''"><a th:href="@{/article}">文章列表</a></li>
+						<li th:classappend="${menu=='content_articleCategory'}?'act_item':''"><a th:href="@{/articleCategory}">文章分类</a></li>
+						<li th:classappend="${menu=='content_articleTag'}?'act_item':''"><a th:href="@{/articleTag}">文章标签</a></li>
+					</ul></li>
+
+				<li title="系统管理"><a href="#"> <span class="menu_icon"><i class="material-icons">settings</i></span> <span
+						class="menu_title">系统管理</span>
+				</a>
+					<ul>
+						<li th:classappend="${menu=='system_user'}?'act_item':''"><a th:href="@{/user}">用户管理</a></li>
+					</ul></li>
+
+				<li th:classappend="${menu=='userprofile'}?'current_section':''" title="个人资料"><a th:href="@{/user/profile}">
+						<span class="menu_icon"><i class="material-icons">&#xE87C;</i></span> <span class="menu_title">个人资料</span>
+				</a></li>
+
+			</ul>
+		</div>
+	</aside>
+
+</body>
+</html>

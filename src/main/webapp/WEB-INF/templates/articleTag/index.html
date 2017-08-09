@@ -1,0 +1,164 @@
+<!doctype html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<!--[if lte IE 9]> <html class="lte-ie9 app_theme_f" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!-->
+<html lang="en" class="app_theme_f" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<!--<![endif]-->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="msapplication-tap-highlight" content="no" />
+
+<link rel="icon" type="image/png" th:href="@{/assets/img/favicon-16x16.png}" sizes="16x16">
+<link rel="icon" type="image/png" th:href="@{/assets/img/favicon-32x32.png}" sizes="32x32">
+
+<title>文章标签</title>
+
+<!-- uikit -->
+<link rel="stylesheet" th:href="@{/bower_components/uikit/css/uikit.almost-flat.min.css}" media="all">
+
+<!-- flag icons -->
+<link rel="stylesheet" th:href="@{/assets/uikit/css/flags.min.css}" media="all">
+
+<!-- altair admin -->
+<link rel="stylesheet" th:href="@{/assets/uikit/css/main.min.css}" media="all">
+
+<!-- themes -->
+<link rel="stylesheet" th:href="@{/assets/uikit/css/themes/themes_combined.min.css}" media="all">
+
+<!-- matchMedia polyfill for testing media queries in JS -->
+<!--[if lte IE 9]>
+        <script type="text/javascript" th:src="@{/bower_components/matchMedia/matchMedia.js}"></script>
+        <script type="text/javascript" th:src="@{/bower_components/matchMedia/matchMedia.addListener.js}"></script>
+        <link rel="stylesheet" th:href="@{/assets/uikit/css/ie.css}" media="all">
+    <![endif]-->
+</head>
+
+<body class="disable_transitions sidebar_main_open sidebar_main_swipe">
+	<!-- main header -->
+	<div th:replace="/layout/header :: main"></div>
+	<!-- main header end -->
+
+	<!-- main sidebar -->
+	<div th:replace="/layout/sidebar :: main('content_articleTag')"></div>
+	<!-- main sidebar end -->
+
+	<div id="page_content">
+
+		<div id="page_content_inner">
+
+			<h3 class="heading_b uk-margin-bottom">标签列表</h3>
+
+			<div class="md-fab-wrapper md-fab-speed-dial-horizontal" data-fab-hover>
+				<div class="md-fab-wrapper-small">
+					<a class="md-fab md-fab-small md-fab-danger" href="javascript:void(0)"><i class="material-icons">&#xE872;</i></a> <a
+						class="md-fab md-fab-small md-fab-success" th:href="@{/articleTag/add}"><i class="material-icons">&#xE145;</i></a>
+				</div>
+				<a class="md-fab md-fab-primary" href="javascript:void(0)"><i class="material-icons">&#xE8BE;</i></a>
+			</div>
+
+			<div class="md-card">
+				<div class="md-card-content">
+					<form id="search-form">
+						<div class="uk-grid">
+							<div class="uk-width-medium-3-10">
+								<label for="search_input_name">名称</label> <input type="text" name="name" class="md-input" id="search_input_name">
+							</div>
+							<div class="uk-width-medium-2-10 uk-text-center">
+								<button type="submit" class="md-btn md-btn-primary uk-margin-small-top" id="search-button">查询</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+
+			<div class="md-card">
+				<div class="md-card-content">
+					<div class="uk-overflow-container">
+						<table id="test_table" class="uk-table uk-table-nowrap table_check uk-table-align-vertical uk-table-condensed">
+							<thead>
+								<tr>
+									<th data-column-id="id" data-header-css-class="uk-width-1-10" data-type="numeric" data-identifier="true"
+										data-visible="false">ID</th>
+									<th data-column-id="name" data-header-css-class="uk-width-6-10 uk-text-center" data-css-class="uk-text-center">名称</th>
+									<th data-column-id="sortNo" data-header-css-class="uk-width-2-10 uk-text-center" data-css-class="uk-text-center">排序号</th>
+									<th data-formatter="commands" data-header-css-class="uk-width-1-10 uk-text-center"
+										data-css-class="uk-text-center">操作</th>
+								</tr>
+							</thead>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div th:replace="/layout/footer :: main"></div>
+
+	<script type="text/javascript" th:inline="javascript">
+		var base = /*[[${#httpServletRequest.getContextPath()}]]*/"";
+	</script>
+
+	<!-- common functions -->
+	<script th:src="@{/assets/uikit/js/common.min.js}"></script>
+	<!-- uikit functions -->
+	<script th:src="@{/assets/uikit/js/uikit_custom.min.js}"></script>
+
+	<!-- altair common functions/helpers -->
+	<script th:src="@{/assets/uikit/js/altair_admin_common.js}"></script>
+
+	<script th:src="@{/assets/uikit/js/jquery.bootgrid.js}"></script>
+	<script>
+		$(function() {
+			if (isHighDensity()) {
+				$.getScript(base + "/assets/uikit/js/custom/dense.min.js", function(data) {
+					// enable hires images
+					altair_helpers.retina_images();
+				});
+			}
+			if (Modernizr.touch) {
+				// fastClick (touch devices)
+				FastClick.attach(document.body);
+			}
+			var parseQueryString = function(arr_url) {
+				var reg_para = /([^&=]+)=([\w\W]*?)(&|$|#)/g, ret = {};
+				if (arr_url) {
+					var str_para = arr_url, result;
+					while ((result = reg_para.exec(str_para)) != null) {
+						if (result[2]) {
+							ret[result[1]] = decodeURIComponent(result[2]);
+						}
+					}
+				}
+				return ret;
+			};
+
+			var $table = $("#test_table");
+			$table.bootgrid({
+				url : base + "/articleTag/page",
+				post : function() {
+					var keyValues = $("#search-form").serialize();
+					return parseQueryString(keyValues);
+				},
+				formatters : {
+					"commands" : function(column, row) {
+						var link_edit = "<a href=\""+base+"/articleTag/edit/"+row.id+"\"><i class=\"md-icon material-icons\">&#xE254;</i></a>";
+						var link_delete = "<a href=\"javascript:;\"><i class=\"md-icon material-icons\">&#xE872;</i></a>";
+						return link_edit + link_delete;
+					}
+				}
+			});
+			$("#search-button").on("click", function() {
+				$table.bootgrid("reload");
+				return false;
+			});
+		});
+		$window.load(function() {
+			// ie fixes
+			altair_helpers.ie_fix();
+		});
+	</script>
+
+</body>
+</html>

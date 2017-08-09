@@ -1,0 +1,489 @@
+<!doctype html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<!--[if lte IE 9]> <html class="lte-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!-->
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<!--<![endif]-->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!-- Remove Tap Highlight on Windows Phone IE -->
+<meta name="msapplication-tap-highlight" content="no" />
+
+<link rel="icon" type="image/png" th:href="@{/assets/img/favicon-16x16.png}" sizes="16x16">
+<link rel="icon" type="image/png" th:href="@{/assets/img/favicon-32x32.png}" sizes="32x32">
+
+<title>Altair Admin v2.11.0</title>
+
+<!-- uikit -->
+<link rel="stylesheet" th:href="@{/bower_components/uikit/css/uikit.almost-flat.min.css}" media="all">
+
+<!-- flag icons -->
+<link rel="stylesheet" th:href="@{/assets/uikit/css/flags.min.css}" media="all">
+
+<!-- altair admin -->
+<link rel="stylesheet" th:href="@{/assets/uikit/css/main.min.css}" media="all">
+
+<!-- matchMedia polyfill for testing media queries in JS -->
+<!--[if lte IE 9]>
+        <script type="text/javascript" th:src="@{/bower_components/matchMedia/matchMedia.js}"></script>
+        <script type="text/javascript" th:src="@{/bower_components/matchMedia/matchMedia.addListener.js}"></script>
+        <link rel="stylesheet" th:href="@{/assets/uikit/css/ie.css}" media="all">
+    <![endif]-->
+</head>
+
+<body class="disable_transitions sidebar_main_swipe">
+	<!-- main header -->
+	<div th:replace="/layout/header :: main"></div>
+	<!-- main header end -->
+	<!-- main sidebar -->
+	<div th:replace="/layout/sidebar :: main('')"></div>
+	<!-- main sidebar end -->
+
+	<div id="page_content">
+		<div id="page_content_inner">
+
+			<div class="uk-grid blog_article" data-uk-grid-margin>
+				<div class="uk-width-medium-3-4">
+
+					<h3 class="heading_b uk-margin-bottom">Articles</h3>
+
+					<div class="blog_list uk-grid-width-medium-1-2 uk-grid-width-large-1-3" data-uk-grid="{gutter: 24}">
+						<div>
+							<div class="md-card">
+								<div class="md-card-content small-padding">
+									<img src="http://altair_html.tzdthemes.com/assets/img/gallery/Image01.jpg" alt=""
+										class="blog_list_teaser_image">
+									<div class="blog_list_teaser">
+										<h2 class="blog_list_teaser_title uk-text-truncate">Commodi consequatur.</h2>
+										<p>Aspernatur natus voluptas assumenda ex nihil eos mollitia ut dignissimos autem aut dolorum est.</p>
+										<span class="uk-text-muted uk-text-small">18.06.2016</span>
+									</div>
+									<div class="blog_list_footer">
+										<div class="blog_list_footer_info">
+											<span class="uk-margin-right"><i class="material-icons">&#xE87D;</i> <small>25</small></span> <span><i
+												class="material-icons">&#xE0B9;</i> <small>183</small></span>
+										</div>
+										<a href="page_blog_article.html" class="md-btn md-btn-small md-btn-flat md-btn-flat-primary uk-float-right">Read
+											more</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div>
+							<div class="md-card">
+								<div class="md-card-content small-padding">
+									<div class="blog_list_teaser">
+										<h2 class="blog_list_teaser_title uk-text-truncate">Illum harum et.</h2>
+										<p>Aut est dolor nulla eos aliquid provident id cupiditate placeat et nulla vero possimus architecto est
+											provident eum qui vero voluptatem sit beatae voluptates dignissimos animi eius vel aut laudantium.</p>
+										<span class="uk-text-muted uk-text-small">18.06.2016</span>
+									</div>
+									<div class="blog_list_footer">
+										<div class="blog_list_footer_info">
+											<span class="uk-margin-right"><i class="material-icons">&#xE87D;</i> <small>26</small></span> <span><i
+												class="material-icons">&#xE0B9;</i> <small>105</small></span>
+										</div>
+										<a href="page_blog_article.html" class="md-btn md-btn-small md-btn-flat md-btn-flat-primary uk-float-right">Read
+											more</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div>
+							<div class="md-card">
+								<div class="md-card-content small-padding">
+									<div class="uk-cover blog_list_teaser_video"></div>
+									<div class="blog_list_teaser">
+										<h2 class="blog_list_teaser_title uk-text-truncate">Sed libero.</h2>
+										<p>Placeat nulla commodi libero saepe eveniet qui in temporibus eos molestiae eius et aperiam.</p>
+										<span class="uk-text-muted uk-text-small">24.06.2016</span>
+									</div>
+									<div class="blog_list_footer">
+										<div class="blog_list_footer_info">
+											<span class="uk-margin-right"><i class="material-icons">&#xE87D;</i> <small>17</small></span> <span><i
+												class="material-icons">&#xE0B9;</i> <small>121</small></span>
+										</div>
+										<a href="page_blog_article.html" class="md-btn md-btn-small md-btn-flat md-btn-flat-primary uk-float-right">Read
+											more</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div>
+							<div class="md-card">
+								<div class="md-card-content small-padding">
+									<img src="http://altair_html.tzdthemes.com/assets/img/gallery/Image03.jpg" alt=""
+										class="blog_list_teaser_image">
+									<div class="blog_list_teaser">
+										<h2 class="blog_list_teaser_title uk-text-truncate">Quaerat error beatae.</h2>
+										<p>Deleniti aperiam dignissimos laudantium qui rerum rerum accusamus quas consequatur molestias neque vel
+											soluta aut sapiente at et.</p>
+										<span class="uk-text-muted uk-text-small">18.06.2016</span>
+									</div>
+									<div class="blog_list_footer">
+										<div class="blog_list_footer_info">
+											<span class="uk-margin-right"><i class="material-icons">&#xE87D;</i> <small>29</small></span> <span><i
+												class="material-icons">&#xE0B9;</i> <small>188</small></span>
+										</div>
+										<a href="page_blog_article.html" class="md-btn md-btn-small md-btn-flat md-btn-flat-primary uk-float-right">Read
+											more</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div>
+							<div class="md-card">
+								<div class="md-card-content small-padding">
+									<div class="uk-cover blog_list_teaser_video"></div>
+									<div class="blog_list_teaser">
+										<h2 class="blog_list_teaser_title uk-text-truncate">Maiores ut reiciendis.</h2>
+										<p>Autem ea hic ipsa alias aut odio nostrum eveniet natus temporibus in sint voluptas iste voluptatem
+											reprehenderit in minus cum optio et.</p>
+										<span class="uk-text-muted uk-text-small">08.06.2016</span>
+									</div>
+									<div class="blog_list_footer">
+										<div class="blog_list_footer_info">
+											<span class="uk-margin-right"><i class="material-icons">&#xE87D;</i> <small>11</small></span> <span><i
+												class="material-icons">&#xE0B9;</i> <small>107</small></span>
+										</div>
+										<a href="page_blog_article.html" class="md-btn md-btn-small md-btn-flat md-btn-flat-primary uk-float-right">Read
+											more</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div>
+							<div class="md-card">
+								<div class="md-card-content small-padding">
+									<img src="http://altair_html.tzdthemes.com/assets/img/gallery/Image04.jpg" alt=""
+										class="blog_list_teaser_image">
+									<div class="blog_list_teaser">
+										<h2 class="blog_list_teaser_title uk-text-truncate">Eligendi quia.</h2>
+										<p>Nihil expedita repudiandae et veniam debitis harum quisquam quo est tempora et eveniet totam saepe
+											molestiae consequatur adipisci ullam est ut sed quaerat corrupti quis.</p>
+										<span class="uk-text-muted uk-text-small">18.06.2016</span>
+									</div>
+									<div class="blog_list_footer">
+										<div class="blog_list_footer_info">
+											<span class="uk-margin-right"><i class="material-icons">&#xE87D;</i> <small>20</small></span> <span><i
+												class="material-icons">&#xE0B9;</i> <small>69</small></span>
+										</div>
+										<a href="page_blog_article.html" class="md-btn md-btn-small md-btn-flat md-btn-flat-primary uk-float-right">Read
+											more</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div>
+							<div class="md-card">
+								<div class="md-card-content small-padding">
+									<div class="uk-margin-bottom"></div>
+									<div class="blog_list_teaser">
+										<p>Quia enim sint occaecati vel est incidunt iure cum totam consequatur.</p>
+										<span class="uk-text-muted uk-text-small">24.06.2016</span>
+									</div>
+									<div class="blog_list_footer">
+										<div class="blog_list_footer_info">
+											<span class="uk-margin-right"><i class="material-icons">&#xE87D;</i> <small>20</small></span> <span><i
+												class="material-icons">&#xE0B9;</i> <small>65</small></span>
+										</div>
+										<a href="page_blog_article.html" class="md-btn md-btn-small md-btn-flat md-btn-flat-primary uk-float-right">Read
+											more</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div>
+							<div class="md-card">
+								<div class="md-card-content small-padding">
+									<img src="http://altair_html.tzdthemes.com/assets/img/gallery/Image05.jpg" alt=""
+										class="blog_list_teaser_image">
+									<div class="blog_list_teaser">
+										<h2 class="blog_list_teaser_title uk-text-truncate">Officia in.</h2>
+										<p>Dignissimos placeat expedita dolores delectus quod vero atque nesciunt dolore placeat perferendis eius
+											consequatur quam.</p>
+										<span class="uk-text-muted uk-text-small">18.06.2016</span>
+									</div>
+									<div class="blog_list_footer">
+										<div class="blog_list_footer_info">
+											<span class="uk-margin-right"><i class="material-icons">&#xE87D;</i> <small>3</small></span> <span><i
+												class="material-icons">&#xE0B9;</i> <small>85</small></span>
+										</div>
+										<a href="page_blog_article.html" class="md-btn md-btn-small md-btn-flat md-btn-flat-primary uk-float-right">Read
+											more</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div>
+							<div class="md-card">
+								<div class="md-card-content small-padding">
+									<img src="http://altair_html.tzdthemes.com/assets/img/gallery/Image06.jpg" alt=""
+										class="blog_list_teaser_image">
+									<div class="blog_list_teaser">
+										<h2 class="blog_list_teaser_title uk-text-truncate">Sed voluptatibus.</h2>
+										<p>Quia sit quae laborum quis amet illum temporibus.</p>
+										<span class="uk-text-muted uk-text-small">18.06.2016</span>
+									</div>
+									<div class="blog_list_footer">
+										<div class="blog_list_footer_info">
+											<span class="uk-margin-right"><i class="material-icons">&#xE87D;</i> <small>10</small></span> <span><i
+												class="material-icons">&#xE0B9;</i> <small>242</small></span>
+										</div>
+										<a href="page_blog_article.html" class="md-btn md-btn-small md-btn-flat md-btn-flat-primary uk-float-right">Read
+											more</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div>
+							<div class="md-card">
+								<div class="md-card-content small-padding">
+									<div class="blog_list_teaser">
+										<h2 class="blog_list_teaser_title uk-text-truncate">Aliquam quia voluptatem.</h2>
+										<p>Ea deleniti ut alias dolores nostrum tempore eaque aut temporibus dolores rem id inventore quas nobis
+											possimus reprehenderit eveniet voluptatem.</p>
+										<span class="uk-text-muted uk-text-small">18.06.2016</span>
+									</div>
+									<div class="blog_list_footer">
+										<div class="blog_list_footer_info">
+											<span class="uk-margin-right"><i class="material-icons">&#xE87D;</i> <small>9</small></span> <span><i
+												class="material-icons">&#xE0B9;</i> <small>214</small></span>
+										</div>
+										<a href="page_blog_article.html" class="md-btn md-btn-small md-btn-flat md-btn-flat-primary uk-float-right">Read
+											more</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div>
+							<div class="md-card">
+								<div class="md-card-content small-padding">
+									<img src="http://altair_html.tzdthemes.com/assets/img/gallery/Image08.jpg" alt=""
+										class="blog_list_teaser_image">
+									<div class="blog_list_teaser">
+										<h2 class="blog_list_teaser_title uk-text-truncate">Vitae et sit.</h2>
+										<p>Modi perspiciatis accusantium ut non ad amet eaque possimus autem ea aspernatur quidem itaque omnis
+											amet sit voluptatum ratione et magnam consectetur aut velit hic et natus est nihil cupiditate voluptates iure
+											vel modi ratione dolorem soluta exercitationem.</p>
+										<span class="uk-text-muted uk-text-small">18.06.2016</span>
+									</div>
+									<div class="blog_list_footer">
+										<div class="blog_list_footer_info">
+											<span class="uk-margin-right"><i class="material-icons">&#xE87D;</i> <small>9</small></span> <span><i
+												class="material-icons">&#xE0B9;</i> <small>227</small></span>
+										</div>
+										<a href="page_blog_article.html" class="md-btn md-btn-small md-btn-flat md-btn-flat-primary uk-float-right">Read
+											more</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div>
+							<div class="md-card">
+								<div class="md-card-content small-padding">
+									<img src="http://altair_html.tzdthemes.com/assets/img/gallery/Image09.jpg" alt=""
+										class="blog_list_teaser_image">
+									<div class="blog_list_teaser">
+										<h2 class="blog_list_teaser_title uk-text-truncate">Mollitia aut.</h2>
+										<p>Sapiente aliquid est nesciunt nam maiores et dignissimos nobis error sint doloribus rerum fuga et
+											dolorem molestiae minima sint rerum numquam ad quis magnam magnam.</p>
+										<span class="uk-text-muted uk-text-small">18.06.2016</span>
+									</div>
+									<div class="blog_list_footer">
+										<div class="blog_list_footer_info">
+											<span class="uk-margin-right"><i class="material-icons">&#xE87D;</i> <small>26</small></span> <span><i
+												class="material-icons">&#xE0B9;</i> <small>192</small></span>
+										</div>
+										<a href="page_blog_article.html" class="md-btn md-btn-small md-btn-flat md-btn-flat-primary uk-float-right">Read
+											more</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div>
+							<div class="md-card">
+								<div class="md-card-content small-padding">
+									<img src="http://altair_html.tzdthemes.com/assets/img/gallery/Image10.jpg" alt=""
+										class="blog_list_teaser_image">
+									<div class="blog_list_teaser">
+										<h2 class="blog_list_teaser_title uk-text-truncate">Qui suscipit ipsam.</h2>
+										<p>A a rerum sed reprehenderit pariatur enim nemo alias aperiam voluptatem eum in et illo porro ea qui
+											officia et voluptatem doloribus.</p>
+										<span class="uk-text-muted uk-text-small">18.06.2016</span>
+									</div>
+									<div class="blog_list_footer">
+										<div class="blog_list_footer_info">
+											<span class="uk-margin-right"><i class="material-icons">&#xE87D;</i> <small>5</small></span> <span><i
+												class="material-icons">&#xE0B9;</i> <small>31</small></span>
+										</div>
+										<a href="page_blog_article.html" class="md-btn md-btn-small md-btn-flat md-btn-flat-primary uk-float-right">Read
+											more</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div>
+							<div class="md-card">
+								<div class="md-card-content small-padding">
+									<img src="http://altair_html.tzdthemes.com/assets/img/gallery/Image11.jpg" alt=""
+										class="blog_list_teaser_image">
+									<div class="blog_list_teaser">
+										<h2 class="blog_list_teaser_title uk-text-truncate">Recusandae mollitia quisquam.</h2>
+										<p>Et minima et suscipit sequi provident magnam quia cumque dolorem qui minus eum.</p>
+										<span class="uk-text-muted uk-text-small">18.06.2016</span>
+									</div>
+									<div class="blog_list_footer">
+										<div class="blog_list_footer_info">
+											<span class="uk-margin-right"><i class="material-icons">&#xE87D;</i> <small>14</small></span> <span><i
+												class="material-icons">&#xE0B9;</i> <small>288</small></span>
+										</div>
+										<a href="page_blog_article.html" class="md-btn md-btn-small md-btn-flat md-btn-flat-primary uk-float-right">Read
+											more</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="uk-width-medium-1-4">
+					<h5 class="uk-margin-small-bottom uk-text-upper">Recent Posts</h5>
+					<ul class="md-list uk-margin-remove">
+						<li>
+							<div class="md-list-content">
+								<span class="md-list-heading uk-text-truncate"><a href="#">Lorem ipsum dolor sit amet, consectetur
+										adipisicing</a></span> <span class="uk-text-small uk-text-muted">April 16, 2016</span>
+							</div>
+						</li>
+						<li>
+							<div class="md-list-content">
+								<span class="md-list-heading uk-text-truncate"><a href="#">Lorem ipsum dolor sit.</a></span> <span
+									class="uk-text-small uk-text-muted">April 16, 2016</span>
+							</div>
+						</li>
+						<li>
+							<div class="md-list-content">
+								<span class="md-list-heading uk-text-truncate"><a href="#">Lorem ipsum dolor sit amet.</a></span> <span
+									class="uk-text-small uk-text-muted">April 16, 2016</span>
+							</div>
+						</li>
+						<li>
+							<div class="md-list-content">
+								<span class="md-list-heading uk-text-truncate"><a href="#">Lorem ipsum dolor sit amet, consectetur
+										adipisicing elit.</a></span> <span class="uk-text-small uk-text-muted">April 16, 2016</span>
+							</div>
+						</li>
+					</ul>
+					<h5 class="uk-margin-small-bottom uk-text-upper  uk-margin-large">Tags</h5>
+					<div class="blog_tags">
+						<a href="#" class="uk-badge">admin panel</a> <a href="#" class="uk-badge">backend</a> <a href="#" class="uk-badge">bower</a>
+						<a href="#" class="uk-badge">dashboard</a> <a href="#" class="uk-badge">gulp</a> <a href="#" class="uk-badge">html
+							admin</a> <a href="#" class="uk-badge uk-badge-success">material design</a> <a href="#" class="uk-badge">invoices</a>
+						<a href="#" class="uk-badge">kendo ui</a> <a href="#" class="uk-badge">less</a> <a href="#" class="uk-badge">uikit</a>
+					</div>
+					<h5 class="uk-margin-small-bottom uk-text-upper uk-margin-large">Top Authors</h5>
+					<ul class="md-list md-list-addon uk-margin-remove">
+						<li>
+							<div class="md-list-addon-element">
+								<img class="md-user-image md-list-addon-avatar"
+									src="http://altair_html.tzdthemes.com/assets/img/avatars/avatar_02_tn.png" alt="" />
+							</div>
+							<div class="md-list-content">
+								<span class="md-list-heading">Bailey Stark</span> <span class="uk-text-small uk-text-muted"> <span
+									class="uk-margin-small-right"><i class="material-icons md-color-red-600">&#xE87D;</i> <small>30</small></span>
+									<span><i class="material-icons">&#xE0B9;</i> <small>284</small></span>
+								</span>
+							</div>
+						</li>
+						<li>
+							<div class="md-list-addon-element">
+								<img class="md-user-image md-list-addon-avatar"
+									src="http://altair_html.tzdthemes.com/assets/img/avatars/avatar_07_tn.png" alt="" />
+							</div>
+							<div class="md-list-content">
+								<span class="md-list-heading">Jody Koss</span> <span class="uk-text-small uk-text-muted"> <span
+									class="uk-margin-small-right"><i class="material-icons">&#xE87D;</i> <small>23</small></span> <span><i
+										class="material-icons">&#xE0B9;</i> <small>293</small></span>
+								</span>
+							</div>
+						</li>
+						<li>
+							<div class="md-list-addon-element">
+								<img class="md-user-image md-list-addon-avatar"
+									src="http://altair_html.tzdthemes.com/assets/img/avatars/avatar_06_tn.png" alt="" />
+							</div>
+							<div class="md-list-content">
+								<span class="md-list-heading">Yasmin Hansen</span> <span class="uk-text-small uk-text-muted"> <span
+									class="uk-margin-small-right"><i class="material-icons">&#xE87D;</i> <small>14</small></span> <span><i
+										class="material-icons">&#xE0B9;</i> <small>35</small></span>
+								</span>
+							</div>
+						</li>
+					</ul>
+					<h5 class="uk-margin-small-bottom uk-text-upper uk-margin-large">Categories</h5>
+					<ul class="md-list uk-margin-remove">
+						<li>
+							<div class="md-list-content">
+								<span class="md-list-heading"><a href="#">Material Design</a></span> <span class="uk-text-small uk-text-muted">23
+									posts</span>
+							</div>
+						</li>
+						<li>
+							<div class="md-list-content">
+								<span class="md-list-heading"><a href="#">Gulp</a></span> <span class="uk-text-small uk-text-muted">8
+									posts</span>
+							</div>
+						</li>
+						<li>
+							<div class="md-list-content">
+								<span class="md-list-heading"><a href="#">Admin</a></span> <span class="uk-text-small uk-text-muted">17
+									posts</span>
+							</div>
+						</li>
+						<li>
+							<div class="md-list-content">
+								<span class="md-list-heading"><a href="#">Ux Design</a></span> <span class="uk-text-small uk-text-muted">4
+									posts</span>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div th:replace="/layout/footer :: main"></div>
+
+	<script type="text/javascript" th:inline="javascript">
+		var base = /*[[${#httpServletRequest.getContextPath()}]]*/"";
+	</script>
+
+	<!-- common functions -->
+	<script th:src="@{/assets/uikit/js/common.min.js}"></script>
+	<!-- uikit functions -->
+	<script th:src="@{/assets/uikit/js/uikit_custom.min.js}"></script>
+	<!-- altair common functions/helpers -->
+	<script th:src="@{/assets/uikit/js/altair_admin_common.min.js}"></script>
+
+	<script>
+		$(function() {
+			if (isHighDensity()) {
+				$.getScript(base + "/assets/uikit/js/custom/dense.min.js", function(data) {
+					// enable hires images
+					altair_helpers.retina_images();
+				});
+			}
+			if (Modernizr.touch) {
+				// fastClick (touch devices)
+				FastClick.attach(document.body);
+			}
+		});
+		$window.load(function() {
+			// ie fixes
+			altair_helpers.ie_fix();
+		});
+	</script>
+</body>
+</html>
