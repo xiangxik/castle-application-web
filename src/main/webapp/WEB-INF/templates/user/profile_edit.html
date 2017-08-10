@@ -13,10 +13,13 @@
 <link rel="icon" type="image/png" th:href="@{/assets/img/favicon-16x16.png}" sizes="16x16">
 <link rel="icon" type="image/png" th:href="@{/assets/img/favicon-32x32.png}" sizes="32x32">
 
-<title>用户编辑</title>
+<title>Altair Admin v2.11.0</title>
 
 <!-- uikit -->
 <link rel="stylesheet" th:href="@{/bower_components/uikit/css/uikit.almost-flat.min.css}" media="all">
+
+<!-- flag icons -->
+<link rel="stylesheet" th:href="@{/assets/uikit/css/flags.min.css}" media="all">
 
 <!-- altair admin -->
 <link rel="stylesheet" th:href="@{/assets/uikit/css/main.min.css}" media="all">
@@ -38,7 +41,7 @@
 	<!-- main header end -->
 
 	<!-- main sidebar -->
-	<div th:replace="/layout/sidebar :: main('system_user')"></div>
+	<div th:replace="/layout/sidebar :: main('userprofile')"></div>
 	<!-- main sidebar end -->
 
 	<div id="page_content">

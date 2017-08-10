@@ -33,6 +33,11 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.castle</groupId>
+			<artifactId>castle-elfinder</artifactId>
+			<version>${castle-platform.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.castle</groupId>
 			<artifactId>castle-security</artifactId>
 			<version>${castle-platform.version}</version>
 		</dependency>

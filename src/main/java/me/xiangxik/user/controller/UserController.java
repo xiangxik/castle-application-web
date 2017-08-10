@@ -5,11 +5,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.castle.core.CastleConstants;
+import com.castle.security.CurrentUser;
 import com.google.common.base.Strings;
 import com.querydsl.core.types.Predicate;
 
@@ -52,6 +55,18 @@ public class UserController extends EntityController<User, Long> {
 		if (!Strings.isNullOrEmpty(newPassword)) {
 			entity.setPassword(passwordEncoder.encode(newPassword));
 		}
+	}
+
+	@RequestMapping(value = "/profile", method = RequestMethod.GET)
+	public String profile(@CurrentUser User user, Model model) {
+		model.addAttribute("user", user);
+		return getBaseTemplatePath() + "/profile";
+	}
+
+	@RequestMapping(value = "/profile_edit", method = RequestMethod.GET)
+	public String profileEdit(@CurrentUser User user, Model model) {
+		model.addAttribute("entity", user);
+		return getBaseTemplatePath() + "/profile_edit";
 	}
 
 }

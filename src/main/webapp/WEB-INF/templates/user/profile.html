@@ -1,0 +1,667 @@
+<!doctype html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<!--[if lte IE 9]> <html class="lte-ie9 app_theme_f" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!-->
+<html lang="en" class="app_theme_f" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<!--<![endif]-->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="msapplication-tap-highlight" content="no" />
+
+<link rel="icon" type="image/png" th:href="@{/assets/img/favicon-16x16.png}" sizes="16x16">
+<link rel="icon" type="image/png" th:href="@{/assets/img/favicon-32x32.png}" sizes="32x32">
+
+<title>Altair Admin v2.11.0</title>
+
+<!-- uikit -->
+<link rel="stylesheet" th:href="@{/bower_components/uikit/css/uikit.almost-flat.min.css}" media="all">
+
+<!-- flag icons -->
+<link rel="stylesheet" th:href="@{/assets/uikit/css/flags.min.css}" media="all">
+
+<!-- altair admin -->
+<link rel="stylesheet" th:href="@{/assets/uikit/css/main.min.css}" media="all">
+
+<!-- themes -->
+<link rel="stylesheet" th:href="@{/assets/uikit/css/themes/themes_combined.min.css}" media="all">
+
+<!-- matchMedia polyfill for testing media queries in JS -->
+<!--[if lte IE 9]>
+        <script type="text/javascript" th:src="@{/bower_components/matchMedia/matchMedia.js}"></script>
+        <script type="text/javascript" th:src="@{/bower_components/matchMedia/matchMedia.addListener.js}"></script>
+        <link rel="stylesheet" th:href="@{/assets/uikit/css/ie.css}" media="all">
+    <![endif]-->
+</head>
+
+<body class="disable_transitions sidebar_main_open sidebar_main_swipe">
+	<!-- main header -->
+	<div th:replace="/layout/header :: main"></div>
+	<!-- main header end -->
+
+	<!-- main sidebar -->
+	<div th:replace="/layout/sidebar :: main('userprofile')"></div>
+	<!-- main sidebar end -->
+
+	<div id="page_content">
+		<div id="page_content_inner">
+
+			<div class="uk-grid" data-uk-grid-margin data-uk-grid-match id="user_profile">
+                <div class="uk-width-large-7-10">
+                    <div class="md-card">
+                        <div class="user_heading">
+                            <div class="user_heading_menu hidden-print">
+                                <div class="uk-display-inline-block" data-uk-dropdown="{pos:'left-top'}">
+                                    <i class="md-icon material-icons md-icon-light">&#xE5D4;</i>
+                                    <div class="uk-dropdown uk-dropdown-small">
+                                        <ul class="uk-nav">
+                                            <li><a href="#">Action 1</a></li>
+                                            <li><a href="#">Action 2</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="uk-display-inline-block"><i class="md-icon md-icon-light material-icons" id="page_print">&#xE8ad;</i></div>
+                            </div>
+                            <div class="user_heading_avatar">
+                                <div class="thumbnail">
+                                    <img src="assets/img/avatars/avatar_11.png" alt="user avatar"/>
+                                </div>
+                            </div>
+                            <div class="user_heading_content">
+                                <h2 class="heading_b uk-margin-bottom"><span class="uk-text-truncate" th:text="${user.name}">name</span><span class="sub-heading" th:text="${user.username}">username</span></h2>
+                                <ul class="user_stats">
+                                    <li>
+                                        <h4 class="heading_a">2391 <span class="sub-heading">文章</span></h4>
+                                    </li>
+                                    <li>
+                                        <h4 class="heading_a">120 <span class="sub-heading">照片</span></h4>
+                                    </li>
+                                    <li>
+                                        <h4 class="heading_a">284 <span class="sub-heading">关注</span></h4>
+                                    </li>
+                                </ul>
+                            </div>
+                            <a class="md-fab md-fab-small md-fab-accent hidden-print" href="profile_edit">
+                                <i class="material-icons">&#xE150;</i>
+                            </a>
+                        </div>
+                        <div class="user_content">
+                            <ul id="user_profile_tabs" class="uk-tab" data-uk-tab="{connect:'#user_profile_tabs_content', animation:'slide-horizontal'}" data-uk-sticky="{ top: 48, media: 960 }">
+                                <li class="uk-active"><a href="#">关于</a></li>
+                                <li><a href="#">文章</a></li>
+                            </ul>
+                            <ul id="user_profile_tabs_content" class="uk-switcher uk-margin">
+                                <li>
+                                		关于我
+                                     <div class="uk-grid uk-margin-medium-top uk-margin-large-bottom" data-uk-grid-margin>
+                                        <div class="uk-width-large-1-2">
+                                            <h4 class="heading_c uk-margin-small-bottom">联系信息</h4>
+                                            <ul class="md-list md-list-addon">
+                                                <li>
+                                                    <div class="md-list-addon-element">
+                                                        <i class="md-list-addon-icon material-icons">&#xE158;</i>
+                                                    </div>
+                                                    <div class="md-list-content">
+                                                        <span class="md-list-heading"><a th:href="'mailto:'+${user.email}" th:text="${user.email}"></a></span>
+                                                        <span class="uk-text-small uk-text-muted">邮箱</span>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="md-list-addon-element">
+                                                        <i class="md-list-addon-icon material-icons">&#xE0CD;</i>
+                                                    </div>
+                                                    <div class="md-list-content">
+                                                        <span class="md-list-heading" th:text="${user.mobile}">mobile</span>
+                                                        <span class="uk-text-small uk-text-muted">手机号码</span>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="uk-width-large-1-2">
+                                            <h4 class="heading_c uk-margin-small-bottom">所属用户组</h4>
+                                            <ul class="md-list">
+                                                <li>
+                                                    <div class="md-list-content">
+                                                        <span class="md-list-heading"><a href="#">Cloud Computing</a></span>
+                                                        <span class="uk-text-small uk-text-muted">86 Members</span>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="md-list-content">
+                                                        <span class="md-list-heading"><a href="#">Account Manager Group</a></span>
+                                                        <span class="uk-text-small uk-text-muted">287 Members</span>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="md-list-content">
+                                                        <span class="md-list-heading"><a href="#">Digital Marketing</a></span>
+                                                        <span class="uk-text-small uk-text-muted">239 Members</span>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="md-list-content">
+                                                        <span class="md-list-heading"><a href="#">HR Professionals Association - Human Resources</a></span>
+                                                        <span class="uk-text-small uk-text-muted">271 Members</span>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <h4 class="heading_c uk-margin-bottom">时间线</h4>
+                                    <div class="timeline">
+                                        <div class="timeline_item">
+                                            <div class="timeline_icon timeline_icon_success"><i class="material-icons">&#xE85D;</i></div>
+                                            <div class="timeline_date">
+                                                09 <span>May</span>
+                                            </div>
+                                            <div class="timeline_content">Created ticket <a href="#"><strong>#3289</strong></a></div>
+                                        </div>
+                                        <div class="timeline_item">
+                                            <div class="timeline_icon timeline_icon_danger"><i class="material-icons">&#xE5CD;</i></div>
+                                            <div class="timeline_date">
+                                                15 <span>May</span>
+                                            </div>
+                                            <div class="timeline_content">Deleted post <a href="#"><strong>Hic blanditiis eveniet reprehenderit quis nisi necessitatibus voluptate.</strong></a></div>
+                                        </div>
+                                        <div class="timeline_item">
+                                            <div class="timeline_icon"><i class="material-icons">&#xE410;</i></div>
+                                            <div class="timeline_date">
+                                                19 <span>May</span>
+                                            </div>
+                                            <div class="timeline_content">
+                                                Added photo
+                                                <div class="timeline_content_addon">
+                                                    <img src="assets/img/gallery/Image16.jpg" alt=""/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="timeline_item">
+                                            <div class="timeline_icon timeline_icon_primary"><i class="material-icons">&#xE0B9;</i></div>
+                                            <div class="timeline_date">
+                                                21 <span>May</span>
+                                            </div>
+                                            <div class="timeline_content">
+                                                New comment on post <a href="#"><strong>Quasi et eius dolorum quae.</strong></a>
+                                                <div class="timeline_content_addon">
+                                                    <blockquote>
+                                                        Qui voluptate illum possimus et animi enim eaque dignissimos dolorum cupiditate tempora aut omnis praesentium laboriosam quod et numquam dolores.&hellip;
+                                                    </blockquote>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="timeline_item">
+                                            <div class="timeline_icon timeline_icon_warning"><i class="material-icons">&#xE7FE;</i></div>
+                                            <div class="timeline_date">
+                                                29 <span>May</span>
+                                            </div>
+                                            <div class="timeline_content">
+                                                Added to Friends
+                                                <div class="timeline_content_addon">
+                                                    <ul class="md-list md-list-addon">
+                                                        <li>
+                                                            <div class="md-list-addon-element">
+                                                                <img class="md-user-image md-list-addon-avatar" src="assets/img/avatars/avatar_02_tn.png" alt=""/>
+                                                            </div>
+                                                            <div class="md-list-content">
+                                                                <span class="md-list-heading">Jennyfer Parker</span>
+                                                                <span class="uk-text-small uk-text-muted">Natus ea id.</span>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <ul class="md-list">
+                                        <li>
+                                            <div class="md-list-content">
+                                                <span class="md-list-heading"><a href="#">Reprehenderit eaque omnis ea distinctio architecto.</a></span>
+                                                <div class="uk-margin-small-top">
+                                                <span class="uk-margin-right">
+                                                    <i class="material-icons">&#xE192;</i> <span class="uk-text-muted uk-text-small">04 May 2017</span>
+                                                </span>
+                                                <span class="uk-margin-right">
+                                                    <i class="material-icons">&#xE0B9;</i> <span class="uk-text-muted uk-text-small">14</span>
+                                                </span>
+                                                <span class="uk-margin-right">
+                                                    <i class="material-icons">&#xE417;</i> <span class="uk-text-muted uk-text-small">354</span>
+                                                </span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="md-list-content">
+                                                <span class="md-list-heading"><a href="#">Voluptas aut qui corporis accusantium.</a></span>
+                                                <div class="uk-margin-small-top">
+                                                <span class="uk-margin-right">
+                                                    <i class="material-icons">&#xE192;</i> <span class="uk-text-muted uk-text-small">28 May 2017</span>
+                                                </span>
+                                                <span class="uk-margin-right">
+                                                    <i class="material-icons">&#xE0B9;</i> <span class="uk-text-muted uk-text-small">16</span>
+                                                </span>
+                                                <span class="uk-margin-right">
+                                                    <i class="material-icons">&#xE417;</i> <span class="uk-text-muted uk-text-small">264</span>
+                                                </span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="md-list-content">
+                                                <span class="md-list-heading"><a href="#">Nam quos in sit natus rem ducimus et.</a></span>
+                                                <div class="uk-margin-small-top">
+                                                <span class="uk-margin-right">
+                                                    <i class="material-icons">&#xE192;</i> <span class="uk-text-muted uk-text-small">05 May 2017</span>
+                                                </span>
+                                                <span class="uk-margin-right">
+                                                    <i class="material-icons">&#xE0B9;</i> <span class="uk-text-muted uk-text-small">10</span>
+                                                </span>
+                                                <span class="uk-margin-right">
+                                                    <i class="material-icons">&#xE417;</i> <span class="uk-text-muted uk-text-small">634</span>
+                                                </span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="md-list-content">
+                                                <span class="md-list-heading"><a href="#">Neque aspernatur ut perspiciatis numquam.</a></span>
+                                                <div class="uk-margin-small-top">
+                                                <span class="uk-margin-right">
+                                                    <i class="material-icons">&#xE192;</i> <span class="uk-text-muted uk-text-small">08 May 2017</span>
+                                                </span>
+                                                <span class="uk-margin-right">
+                                                    <i class="material-icons">&#xE0B9;</i> <span class="uk-text-muted uk-text-small">24</span>
+                                                </span>
+                                                <span class="uk-margin-right">
+                                                    <i class="material-icons">&#xE417;</i> <span class="uk-text-muted uk-text-small">723</span>
+                                                </span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="md-list-content">
+                                                <span class="md-list-heading"><a href="#">Eveniet animi odio a vitae.</a></span>
+                                                <div class="uk-margin-small-top">
+                                                <span class="uk-margin-right">
+                                                    <i class="material-icons">&#xE192;</i> <span class="uk-text-muted uk-text-small">22 May 2017</span>
+                                                </span>
+                                                <span class="uk-margin-right">
+                                                    <i class="material-icons">&#xE0B9;</i> <span class="uk-text-muted uk-text-small">5</span>
+                                                </span>
+                                                <span class="uk-margin-right">
+                                                    <i class="material-icons">&#xE417;</i> <span class="uk-text-muted uk-text-small">625</span>
+                                                </span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="md-list-content">
+                                                <span class="md-list-heading"><a href="#">Nostrum unde sunt nemo odio cumque velit.</a></span>
+                                                <div class="uk-margin-small-top">
+                                                <span class="uk-margin-right">
+                                                    <i class="material-icons">&#xE192;</i> <span class="uk-text-muted uk-text-small">19 May 2017</span>
+                                                </span>
+                                                <span class="uk-margin-right">
+                                                    <i class="material-icons">&#xE0B9;</i> <span class="uk-text-muted uk-text-small">5</span>
+                                                </span>
+                                                <span class="uk-margin-right">
+                                                    <i class="material-icons">&#xE417;</i> <span class="uk-text-muted uk-text-small">398</span>
+                                                </span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="md-list-content">
+                                                <span class="md-list-heading"><a href="#">Qui labore reiciendis recusandae laborum minus quae modi.</a></span>
+                                                <div class="uk-margin-small-top">
+                                                <span class="uk-margin-right">
+                                                    <i class="material-icons">&#xE192;</i> <span class="uk-text-muted uk-text-small">05 May 2017</span>
+                                                </span>
+                                                <span class="uk-margin-right">
+                                                    <i class="material-icons">&#xE0B9;</i> <span class="uk-text-muted uk-text-small">22</span>
+                                                </span>
+                                                <span class="uk-margin-right">
+                                                    <i class="material-icons">&#xE417;</i> <span class="uk-text-muted uk-text-small">940</span>
+                                                </span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="md-list-content">
+                                                <span class="md-list-heading"><a href="#">Delectus aliquid aut sed corrupti asperiores sint sunt.</a></span>
+                                                <div class="uk-margin-small-top">
+                                                <span class="uk-margin-right">
+                                                    <i class="material-icons">&#xE192;</i> <span class="uk-text-muted uk-text-small">10 May 2017</span>
+                                                </span>
+                                                <span class="uk-margin-right">
+                                                    <i class="material-icons">&#xE0B9;</i> <span class="uk-text-muted uk-text-small">22</span>
+                                                </span>
+                                                <span class="uk-margin-right">
+                                                    <i class="material-icons">&#xE417;</i> <span class="uk-text-muted uk-text-small">694</span>
+                                                </span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="md-list-content">
+                                                <span class="md-list-heading"><a href="#">Tempore sint error sed facilis esse voluptas non.</a></span>
+                                                <div class="uk-margin-small-top">
+                                                <span class="uk-margin-right">
+                                                    <i class="material-icons">&#xE192;</i> <span class="uk-text-muted uk-text-small">18 May 2017</span>
+                                                </span>
+                                                <span class="uk-margin-right">
+                                                    <i class="material-icons">&#xE0B9;</i> <span class="uk-text-muted uk-text-small">3</span>
+                                                </span>
+                                                <span class="uk-margin-right">
+                                                    <i class="material-icons">&#xE417;</i> <span class="uk-text-muted uk-text-small">725</span>
+                                                </span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="md-list-content">
+                                                <span class="md-list-heading"><a href="#">Dolorem molestiae quo debitis ut esse et officiis soluta.</a></span>
+                                                <div class="uk-margin-small-top">
+                                                <span class="uk-margin-right">
+                                                    <i class="material-icons">&#xE192;</i> <span class="uk-text-muted uk-text-small">25 May 2017</span>
+                                                </span>
+                                                <span class="uk-margin-right">
+                                                    <i class="material-icons">&#xE0B9;</i> <span class="uk-text-muted uk-text-small">2</span>
+                                                </span>
+                                                <span class="uk-margin-right">
+                                                    <i class="material-icons">&#xE417;</i> <span class="uk-text-muted uk-text-small">535</span>
+                                                </span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="md-list-content">
+                                                <span class="md-list-heading"><a href="#">Facilis amet voluptate eos dignissimos.</a></span>
+                                                <div class="uk-margin-small-top">
+                                                <span class="uk-margin-right">
+                                                    <i class="material-icons">&#xE192;</i> <span class="uk-text-muted uk-text-small">23 May 2017</span>
+                                                </span>
+                                                <span class="uk-margin-right">
+                                                    <i class="material-icons">&#xE0B9;</i> <span class="uk-text-muted uk-text-small">4</span>
+                                                </span>
+                                                <span class="uk-margin-right">
+                                                    <i class="material-icons">&#xE417;</i> <span class="uk-text-muted uk-text-small">959</span>
+                                                </span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="md-list-content">
+                                                <span class="md-list-heading"><a href="#">Eius dolorem veniam quisquam.</a></span>
+                                                <div class="uk-margin-small-top">
+                                                <span class="uk-margin-right">
+                                                    <i class="material-icons">&#xE192;</i> <span class="uk-text-muted uk-text-small">02 May 2017</span>
+                                                </span>
+                                                <span class="uk-margin-right">
+                                                    <i class="material-icons">&#xE0B9;</i> <span class="uk-text-muted uk-text-small">2</span>
+                                                </span>
+                                                <span class="uk-margin-right">
+                                                    <i class="material-icons">&#xE417;</i> <span class="uk-text-muted uk-text-small">550</span>
+                                                </span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="md-list-content">
+                                                <span class="md-list-heading"><a href="#">Id quaerat aut est ut voluptates.</a></span>
+                                                <div class="uk-margin-small-top">
+                                                <span class="uk-margin-right">
+                                                    <i class="material-icons">&#xE192;</i> <span class="uk-text-muted uk-text-small">08 May 2017</span>
+                                                </span>
+                                                <span class="uk-margin-right">
+                                                    <i class="material-icons">&#xE0B9;</i> <span class="uk-text-muted uk-text-small">6</span>
+                                                </span>
+                                                <span class="uk-margin-right">
+                                                    <i class="material-icons">&#xE417;</i> <span class="uk-text-muted uk-text-small">847</span>
+                                                </span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="md-list-content">
+                                                <span class="md-list-heading"><a href="#">Explicabo sit culpa sit eos fugiat nihil.</a></span>
+                                                <div class="uk-margin-small-top">
+                                                <span class="uk-margin-right">
+                                                    <i class="material-icons">&#xE192;</i> <span class="uk-text-muted uk-text-small">24 May 2017</span>
+                                                </span>
+                                                <span class="uk-margin-right">
+                                                    <i class="material-icons">&#xE0B9;</i> <span class="uk-text-muted uk-text-small">13</span>
+                                                </span>
+                                                <span class="uk-margin-right">
+                                                    <i class="material-icons">&#xE417;</i> <span class="uk-text-muted uk-text-small">692</span>
+                                                </span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="md-list-content">
+                                                <span class="md-list-heading"><a href="#">Odit corporis magni harum voluptatem nobis.</a></span>
+                                                <div class="uk-margin-small-top">
+                                                <span class="uk-margin-right">
+                                                    <i class="material-icons">&#xE192;</i> <span class="uk-text-muted uk-text-small">16 May 2017</span>
+                                                </span>
+                                                <span class="uk-margin-right">
+                                                    <i class="material-icons">&#xE0B9;</i> <span class="uk-text-muted uk-text-small">6</span>
+                                                </span>
+                                                <span class="uk-margin-right">
+                                                    <i class="material-icons">&#xE417;</i> <span class="uk-text-muted uk-text-small">842</span>
+                                                </span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="md-list-content">
+                                                <span class="md-list-heading"><a href="#">Voluptas facilis iure nesciunt ullam ratione dolorem eius quis.</a></span>
+                                                <div class="uk-margin-small-top">
+                                                <span class="uk-margin-right">
+                                                    <i class="material-icons">&#xE192;</i> <span class="uk-text-muted uk-text-small">04 May 2017</span>
+                                                </span>
+                                                <span class="uk-margin-right">
+                                                    <i class="material-icons">&#xE0B9;</i> <span class="uk-text-muted uk-text-small">23</span>
+                                                </span>
+                                                <span class="uk-margin-right">
+                                                    <i class="material-icons">&#xE417;</i> <span class="uk-text-muted uk-text-small">992</span>
+                                                </span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="md-list-content">
+                                                <span class="md-list-heading"><a href="#">Autem quos culpa cupiditate qui ut ea delectus.</a></span>
+                                                <div class="uk-margin-small-top">
+                                                <span class="uk-margin-right">
+                                                    <i class="material-icons">&#xE192;</i> <span class="uk-text-muted uk-text-small">13 May 2017</span>
+                                                </span>
+                                                <span class="uk-margin-right">
+                                                    <i class="material-icons">&#xE0B9;</i> <span class="uk-text-muted uk-text-small">27</span>
+                                                </span>
+                                                <span class="uk-margin-right">
+                                                    <i class="material-icons">&#xE417;</i> <span class="uk-text-muted uk-text-small">797</span>
+                                                </span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="md-list-content">
+                                                <span class="md-list-heading"><a href="#">Temporibus deleniti ut cupiditate voluptatem voluptatem repellendus totam id.</a></span>
+                                                <div class="uk-margin-small-top">
+                                                <span class="uk-margin-right">
+                                                    <i class="material-icons">&#xE192;</i> <span class="uk-text-muted uk-text-small">11 May 2017</span>
+                                                </span>
+                                                <span class="uk-margin-right">
+                                                    <i class="material-icons">&#xE0B9;</i> <span class="uk-text-muted uk-text-small">7</span>
+                                                </span>
+                                                <span class="uk-margin-right">
+                                                    <i class="material-icons">&#xE417;</i> <span class="uk-text-muted uk-text-small">600</span>
+                                                </span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="md-list-content">
+                                                <span class="md-list-heading"><a href="#">Inventore dolore quod sequi quo.</a></span>
+                                                <div class="uk-margin-small-top">
+                                                <span class="uk-margin-right">
+                                                    <i class="material-icons">&#xE192;</i> <span class="uk-text-muted uk-text-small">02 May 2017</span>
+                                                </span>
+                                                <span class="uk-margin-right">
+                                                    <i class="material-icons">&#xE0B9;</i> <span class="uk-text-muted uk-text-small">24</span>
+                                                </span>
+                                                <span class="uk-margin-right">
+                                                    <i class="material-icons">&#xE417;</i> <span class="uk-text-muted uk-text-small">685</span>
+                                                </span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="md-list-content">
+                                                <span class="md-list-heading"><a href="#">Cupiditate et quod qui cumque aut iusto aut dolor.</a></span>
+                                                <div class="uk-margin-small-top">
+                                                <span class="uk-margin-right">
+                                                    <i class="material-icons">&#xE192;</i> <span class="uk-text-muted uk-text-small">21 May 2017</span>
+                                                </span>
+                                                <span class="uk-margin-right">
+                                                    <i class="material-icons">&#xE0B9;</i> <span class="uk-text-muted uk-text-small">20</span>
+                                                </span>
+                                                <span class="uk-margin-right">
+                                                    <i class="material-icons">&#xE417;</i> <span class="uk-text-muted uk-text-small">728</span>
+                                                </span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-width-large-3-10 hidden-print">
+                    <div class="md-card">
+                        <div class="md-card-content">
+                            <div class="uk-margin-medium-bottom">
+                                <h3 class="heading_c uk-margin-bottom">Alerts</h3>
+                                <ul class="md-list md-list-addon">
+                                    <li>
+                                        <div class="md-list-addon-element">
+                                            <i class="md-list-addon-icon material-icons uk-text-warning">&#xE8B2;</i>
+                                        </div>
+                                        <div class="md-list-content">
+                                            <span class="md-list-heading">Soluta facere.</span>
+                                            <span class="uk-text-small uk-text-muted uk-text-truncate">Animi laborum fugiat numquam provident omnis.</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="md-list-addon-element">
+                                            <i class="md-list-addon-icon material-icons uk-text-success">&#xE88F;</i>
+                                        </div>
+                                        <div class="md-list-content">
+                                            <span class="md-list-heading">Et sunt.</span>
+                                            <span class="uk-text-small uk-text-muted uk-text-truncate">Dignissimos aut qui assumenda tempora.</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="md-list-addon-element">
+                                            <i class="md-list-addon-icon material-icons uk-text-danger">&#xE001;</i>
+                                        </div>
+                                        <div class="md-list-content">
+                                            <span class="md-list-heading">Ut necessitatibus.</span>
+                                            <span class="uk-text-small uk-text-muted uk-text-truncate">Minima sit laboriosam sint animi accusantium.</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <h3 class="heading_c uk-margin-bottom">Friends</h3>
+                            <ul class="md-list md-list-addon uk-margin-bottom">
+                                <li>
+                                    <div class="md-list-addon-element">
+                                        <img class="md-user-image md-list-addon-avatar" src="assets/img/avatars/avatar_02_tn.png" alt=""/>
+                                    </div>
+                                    <div class="md-list-content">
+                                        <span class="md-list-heading">Ms. Kaylie Wunsch IV</span>
+                                        <span class="uk-text-small uk-text-muted">Nobis distinctio nihil.</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="md-list-addon-element">
+                                        <img class="md-user-image md-list-addon-avatar" src="assets/img/avatars/avatar_07_tn.png" alt=""/>
+                                    </div>
+                                    <div class="md-list-content">
+                                        <span class="md-list-heading">Kolby Ortiz</span>
+                                        <span class="uk-text-small uk-text-muted">Aliquid dicta quia beatae deleniti.</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="md-list-addon-element">
+                                        <img class="md-user-image md-list-addon-avatar" src="assets/img/avatars/avatar_06_tn.png" alt=""/>
+                                    </div>
+                                    <div class="md-list-content">
+                                        <span class="md-list-heading">Heidi Gerhold DDS</span>
+                                        <span class="uk-text-small uk-text-muted">Voluptatem molestias excepturi.</span>
+                                    </div>
+                                </li>
+                            </ul>
+                            <a class="md-btn md-btn-flat md-btn-flat-primary" href="#">Show all</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+		</div>
+	</div>
+
+	<div th:replace="/layout/footer :: main"></div>
+
+	<script type="text/javascript" th:inline="javascript">
+		var base = /*[[${#httpServletRequest.getContextPath()}]]*/"";
+	</script>
+
+	<!-- common functions -->
+	<script th:src="@{/assets/uikit/js/common.min.js}"></script>
+	<!-- uikit functions -->
+	<script th:src="@{/assets/uikit/js/uikit_custom.min.js}"></script>
+
+	<!-- altair common functions/helpers -->
+	<script th:src="@{/assets/uikit/js/altair_admin_common.js}"></script>
+
+	<script>
+		$(function() {
+			if (isHighDensity()) {
+				$.getScript(base + "/assets/uikit/js/custom/dense.min.js", function(data) {
+					// enable hires images
+					altair_helpers.retina_images();
+				});
+			}
+			if (Modernizr.touch) {
+				// fastClick (touch devices)
+				FastClick.attach(document.body);
+			}
+			var parseQueryString = function(arr_url) {
+				var reg_para = /([^&=]+)=([\w\W]*?)(&|$|#)/g, ret = {};
+				if (arr_url) {
+					var str_para = arr_url, result;
+					while ((result = reg_para.exec(str_para)) != null) {
+						if (result[2]) {
+							ret[result[1]] = decodeURIComponent(result[2]);
+						}
+					}
+				}
+				return ret;
+			};
+
+		});
+		$window.load(function() {
+			// ie fixes
+			altair_helpers.ie_fix();
+		});
+
+	</script>
+
+</body>
+</html>
