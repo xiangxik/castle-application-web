@@ -18,9 +18,6 @@
 <!-- uikit -->
 <link rel="stylesheet" th:href="@{/bower_components/uikit/css/uikit.almost-flat.min.css}" media="all">
 
-<!-- flag icons -->
-<link rel="stylesheet" th:href="@{/assets/uikit/css/flags.min.css}" media="all">
-
 <!-- altair admin -->
 <link rel="stylesheet" th:href="@{/assets/uikit/css/main.min.css}" media="all">
 
@@ -65,7 +62,7 @@
                             </div>
                             <div class="user_heading_avatar">
                                 <div class="thumbnail">
-                                    <img src="assets/img/avatars/avatar_11.png" alt="user avatar"/>
+                                    <img th:src="${user.avatar}"/>
                                 </div>
                             </div>
                             <div class="user_heading_content">
@@ -632,12 +629,6 @@
 
 	<script>
 		$(function() {
-			if (isHighDensity()) {
-				$.getScript(base + "/assets/uikit/js/custom/dense.min.js", function(data) {
-					// enable hires images
-					altair_helpers.retina_images();
-				});
-			}
 			if (Modernizr.touch) {
 				// fastClick (touch devices)
 				FastClick.attach(document.body);

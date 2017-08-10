@@ -122,17 +122,14 @@
 						<div class="md-card">
 							<div class="md-card-toolbar">
 								<div class="md-card-toolbar-actions">
-									<i data-uk-modal="{target:'#modal_file'}" class="md-icon material-icons">folder</i>
-									<div class="uk-modal" id="modal_file">
-										<div class="uk-modal-dialog uk-modal-dialog-lightbox">
-											<button type="button" class="uk-modal-close uk-close uk-close-alt"></button>
-											<div style="width:900px;height:450px;"></div>
-										</div>
-									</div>
+									<i id="upload_thumbnail" class="md-icon material-icons">folder</i>
 								</div>
 								<h3 class="md-card-toolbar-heading-text">封面</h3>
 							</div>
-							<div class="md-card-content"></div>
+							<div class="md-card-content">
+								<input id="input_thumbnail" type="hidden" th:field="*{thumbnail}" />
+								<img id="img_thumbnail" th:src="*{thumbnail}">
+							</div>
 						</div>
 						<div class="md-card">
 							<div class="md-card-toolbar">
@@ -197,12 +194,6 @@
 
 	<script>
 		$(function() {
-			if (isHighDensity()) {
-				$.getScript(base + "/assets/uikit/js/custom/dense.min.js", function(data) {
-					// enable hires images
-					altair_helpers.retina_images();
-				});
-			}
 			if (Modernizr.touch) {
 				// fastClick (touch devices)
 				FastClick.attach(document.body);
@@ -239,10 +230,29 @@
 							function(e) {
 								e.preventDefault();
 								$(this).blur();
-								UIkit.modal
-										.dialog(
-												"<div style='width: 900px;height: 450px'><iframe style='width: 900px;height: 450px' src='"+base+"/bower_components/elfinder/elfinder_tinymce.html'></iframe></div>")
-										.show();
+								tinymce.activeEditor.windowManager.open({
+									file : base + '/bower_components/elfinder/elfinder_tinymce.html',// use an absolute path!
+									title : '文件管理器',
+									width : 900,
+									height : 450,
+									resizable : true
+								}, {
+									oninsert : function(file, fm) {
+										var url, reg, info;
+
+										url = file.url;
+										reg = /\/[^/]+?\/\.\.\//;
+										while (url.match(reg)) {
+											url = url.replace(reg, '/');
+										}
+
+										// Make file info
+										info = file.name + ' (' + fm.formatSize(file.size) + ')';
+										var convertedUrl = tinymce.activeEditor.convertURL(url, 'src');
+										$("#input_thumbnail").val(convertedUrl)
+										$("#img_thumbnail").attr("src", convertedUrl);
+									}
+								});
 							});
 
 			function elFinderBrowser(callback, value, meta) {

@@ -18,9 +18,6 @@
 <!-- uikit -->
 <link rel="stylesheet" th:href="@{/bower_components/uikit/css/uikit.almost-flat.min.css}" media="all">
 
-<!-- flag icons -->
-<link rel="stylesheet" th:href="@{/assets/uikit/css/flags.min.css}" media="all">
-
 <!-- altair admin -->
 <link rel="stylesheet" th:href="@{/assets/uikit/css/main.min.css}" media="all">
 
@@ -53,15 +50,16 @@
 					<div class="uk-width-large-7-10">
 						<div class="md-card">
 							<div class="user_heading" data-uk-sticky="{ top: 48, media: 960 }">
-								<div class="user_heading_avatar fileinput fileinput-new" data-provides="fileinput">
+								<div class="user_heading_avatar fileinput fileinput-new">
 									<div class="fileinput-new thumbnail">
-										<img src="http://altair_html.tzdthemes.com/assets/img/avatars/user.png" alt="user avatar" />
+										<img id="img_avatar" th:src="*{avatar}" />
 									</div>
 									<div class="fileinput-preview fileinput-exists thumbnail"></div>
 									<div class="user_avatar_controls">
 										<span class="btn-file"> <span class="fileinput-new"><i class="material-icons">&#xE2C6;</i></span> <span
 											class="fileinput-exists"><i class="material-icons">&#xE86A;</i></span> <input type="file"
-											name="avatar">
+											name="file" id="upload-select">
+											<input id="input_avatar" type="hidden" th:field="*{avatar}" />
 										</span> <a href="#" class="btn-file fileinput-exists" data-dismiss="fileinput"><i class="material-icons">&#xE5CD;</i></a>
 									</div>
 								</div>
@@ -546,12 +544,6 @@
 
 	<script>
 		$(function() {
-			if (isHighDensity()) {
-				$.getScript(base + "/assets/uikit/js/custom/dense.min.js", function(data) {
-					// enable hires images
-					altair_helpers.retina_images();
-				});
-			}
 			if (Modernizr.touch) {
 				// fastClick (touch devices)
 				FastClick.attach(document.body);
@@ -592,7 +584,7 @@
 			}).on('form:submit', function() {
 				$.post($mainForm.attr('action'), $mainForm.serialize(), function(result) {
 					if (result.success) {
-						location.href = base + "/user";
+						location.href = base + "/user/profile";
 					} else {
 						alert(result.msg);
 					}
@@ -619,7 +611,7 @@
 			},
 			edit_form : function() {
 				// form variables
-				var $user_edit_form = $('#user_edit_form'), $user_edit_submit_btn = $('#user_edit_submit'), user_name = $('#user_edit_name'), user_name_control = $('#input_name'), user_position = $('#user_edit_username'), user_position_control = $('#input_username');
+				var  user_name = $('#user_edit_name'), user_name_control = $('#input_name'), user_position = $('#user_edit_username'), user_position_control = $('#input_username');
 
 				user_name_control.val(user_name.text()).on('keyup', function() {
 					user_name.text(user_name_control.val())
@@ -630,13 +622,20 @@
 					user_position.text(user_position_control.val())
 				});
 				altair_md.update_input(user_position_control);
-
-				// submit form
-				$user_edit_submit_btn.on('click', function(e) {
-					e.preventDefault();
-					var form_serialized = JSON.stringify($user_edit_form.serializeObject(), null, 2);
-					UIkit.modal.alert('<p>User data:</p><pre>' + form_serialized + '</pre>');
-				})
+				
+				UIkit.uploadSelect($("#upload-select"), {
+		            action: base+'/multipart/uploadMore', // 上传路径 url
+		            allow : '*.(jpg|jpeg|gif|png)', // 只允许上传图片
+		            loadstart: function() {},
+		            progress: function(percent) {},
+		            allcomplete: function(response) {
+		            		var result = eval('('+response+')');
+		                if(result.success) {
+		                		$("#img_avatar").attr("src", result.urls);
+		                		$("#input_avatar").val(result.urls);
+		                }
+		            }
+		        })
 			},
 			user_groups : function() {
 

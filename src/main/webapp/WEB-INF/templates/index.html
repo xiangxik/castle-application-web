@@ -14,7 +14,7 @@
 <link rel="icon" type="image/png" th:href="@{/assets/img/favicon-16x16.png}" sizes="16x16">
 <link rel="icon" type="image/png" th:href="@{/assets/img/favicon-32x32.png}" sizes="32x32">
 
-<title>Altair Admin v2.11.0</title>
+<title>首页</title>
 
 <!-- uikit -->
 <link rel="stylesheet" th:href="@{/bower_components/uikit/css/uikit.almost-flat.min.css}" media="all">
@@ -44,7 +44,7 @@
 			<div class="uk-grid blog_article" data-uk-grid-margin>
 				<div class="uk-width-medium-3-4">
 
-					<h3 class="heading_b uk-margin-bottom">Articles</h3>
+					<h3 class="heading_b uk-margin-bottom">文章</h3>
 
 					<div class="blog_list uk-grid-width-medium-1-2 uk-grid-width-large-1-3" data-uk-grid="{gutter: 24}">
 						<div>
@@ -346,103 +346,44 @@
 					</div>
 				</div>
 				<div class="uk-width-medium-1-4">
-					<h5 class="uk-margin-small-bottom uk-text-upper">Recent Posts</h5>
+					<h5 class="uk-margin-small-bottom uk-text-upper">最新提交</h5>
 					<ul class="md-list uk-margin-remove">
-						<li>
+						<li th:each="post:${recentPosts}">
 							<div class="md-list-content">
-								<span class="md-list-heading uk-text-truncate"><a href="#">Lorem ipsum dolor sit amet, consectetur
-										adipisicing</a></span> <span class="uk-text-small uk-text-muted">April 16, 2016</span>
-							</div>
-						</li>
-						<li>
-							<div class="md-list-content">
-								<span class="md-list-heading uk-text-truncate"><a href="#">Lorem ipsum dolor sit.</a></span> <span
-									class="uk-text-small uk-text-muted">April 16, 2016</span>
-							</div>
-						</li>
-						<li>
-							<div class="md-list-content">
-								<span class="md-list-heading uk-text-truncate"><a href="#">Lorem ipsum dolor sit amet.</a></span> <span
-									class="uk-text-small uk-text-muted">April 16, 2016</span>
-							</div>
-						</li>
-						<li>
-							<div class="md-list-content">
-								<span class="md-list-heading uk-text-truncate"><a href="#">Lorem ipsum dolor sit amet, consectetur
-										adipisicing elit.</a></span> <span class="uk-text-small uk-text-muted">April 16, 2016</span>
+								<span class="md-list-heading uk-text-truncate">
+									<a th:href="@{/p/}+${post.id}" th:text="${post.title}">title</a></span> 
+									<span class="uk-text-small uk-text-muted" th:text="${#dates.format(post.publishedDate, 'yyyy-MM-dd HH:mm:ss')}">date</span>
 							</div>
 						</li>
 					</ul>
-					<h5 class="uk-margin-small-bottom uk-text-upper  uk-margin-large">Tags</h5>
+					<h5 class="uk-margin-small-bottom uk-text-upper  uk-margin-large">标签</h5>
 					<div class="blog_tags">
-						<a href="#" class="uk-badge">admin panel</a> <a href="#" class="uk-badge">backend</a> <a href="#" class="uk-badge">bower</a>
-						<a href="#" class="uk-badge">dashboard</a> <a href="#" class="uk-badge">gulp</a> <a href="#" class="uk-badge">html
-							admin</a> <a href="#" class="uk-badge uk-badge-success">material design</a> <a href="#" class="uk-badge">invoices</a>
-						<a href="#" class="uk-badge">kendo ui</a> <a href="#" class="uk-badge">less</a> <a href="#" class="uk-badge">uikit</a>
+						<a href="javascript:;" class="uk-badge" th:each="tag:${tags}" th:text="${tag.name}">tag name</a> 
 					</div>
-					<h5 class="uk-margin-small-bottom uk-text-upper uk-margin-large">Top Authors</h5>
+					<h5 class="uk-margin-small-bottom uk-text-upper uk-margin-large">作者排名</h5>
 					<ul class="md-list md-list-addon uk-margin-remove">
-						<li>
+						<li th:each="author:${authors}">
 							<div class="md-list-addon-element">
 								<img class="md-user-image md-list-addon-avatar"
-									src="http://altair_html.tzdthemes.com/assets/img/avatars/avatar_02_tn.png" alt="" />
+									th:src="${author.avatar}" />
 							</div>
 							<div class="md-list-content">
-								<span class="md-list-heading">Bailey Stark</span> <span class="uk-text-small uk-text-muted"> <span
+								<span class="md-list-heading" th:text="${author.name}">name</span> 
+								<span class="uk-text-small uk-text-muted"> <span
 									class="uk-margin-small-right"><i class="material-icons md-color-red-600">&#xE87D;</i> <small>30</small></span>
 									<span><i class="material-icons">&#xE0B9;</i> <small>284</small></span>
 								</span>
 							</div>
 						</li>
-						<li>
-							<div class="md-list-addon-element">
-								<img class="md-user-image md-list-addon-avatar"
-									src="http://altair_html.tzdthemes.com/assets/img/avatars/avatar_07_tn.png" alt="" />
-							</div>
-							<div class="md-list-content">
-								<span class="md-list-heading">Jody Koss</span> <span class="uk-text-small uk-text-muted"> <span
-									class="uk-margin-small-right"><i class="material-icons">&#xE87D;</i> <small>23</small></span> <span><i
-										class="material-icons">&#xE0B9;</i> <small>293</small></span>
-								</span>
-							</div>
-						</li>
-						<li>
-							<div class="md-list-addon-element">
-								<img class="md-user-image md-list-addon-avatar"
-									src="http://altair_html.tzdthemes.com/assets/img/avatars/avatar_06_tn.png" alt="" />
-							</div>
-							<div class="md-list-content">
-								<span class="md-list-heading">Yasmin Hansen</span> <span class="uk-text-small uk-text-muted"> <span
-									class="uk-margin-small-right"><i class="material-icons">&#xE87D;</i> <small>14</small></span> <span><i
-										class="material-icons">&#xE0B9;</i> <small>35</small></span>
-								</span>
-							</div>
-						</li>
 					</ul>
-					<h5 class="uk-margin-small-bottom uk-text-upper uk-margin-large">Categories</h5>
+					<h5 class="uk-margin-small-bottom uk-text-upper uk-margin-large">分类</h5>
 					<ul class="md-list uk-margin-remove">
-						<li>
+						<li th:each="category:${categories}">
 							<div class="md-list-content">
-								<span class="md-list-heading"><a href="#">Material Design</a></span> <span class="uk-text-small uk-text-muted">23
-									posts</span>
-							</div>
-						</li>
-						<li>
-							<div class="md-list-content">
-								<span class="md-list-heading"><a href="#">Gulp</a></span> <span class="uk-text-small uk-text-muted">8
-									posts</span>
-							</div>
-						</li>
-						<li>
-							<div class="md-list-content">
-								<span class="md-list-heading"><a href="#">Admin</a></span> <span class="uk-text-small uk-text-muted">17
-									posts</span>
-							</div>
-						</li>
-						<li>
-							<div class="md-list-content">
-								<span class="md-list-heading"><a href="#">Ux Design</a></span> <span class="uk-text-small uk-text-muted">4
-									posts</span>
+								<span class="md-list-heading">
+									<a href="javascript:;" th:text="${category.name}">catgory</a>
+								</span> 
+								<span class="uk-text-small uk-text-muted">23 posts</span>
 							</div>
 						</li>
 					</ul>
@@ -466,12 +407,6 @@
 
 	<script>
 		$(function() {
-			if (isHighDensity()) {
-				$.getScript(base + "/assets/uikit/js/custom/dense.min.js", function(data) {
-					// enable hires images
-					altair_helpers.retina_images();
-				});
-			}
 			if (Modernizr.touch) {
 				// fastClick (touch devices)
 				FastClick.attach(document.body);
@@ -481,6 +416,10 @@
 			// ie fixes
 			altair_helpers.ie_fix();
 		});
+		
+		var loadArticles(page) {
+			
+		}
 	</script>
 </body>
 </html>
