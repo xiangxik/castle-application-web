@@ -41,180 +41,57 @@
 	<div id="page_content">
 		<div id="page_content_inner">
 
-			<div class="uk-grid blog_article" data-uk-grid-margin>
+			<div class="uk-grid blog_article" data-uk-grid-margin th:object="${post}">
 				<div class="uk-width-medium-3-4">
 					<div class="md-card">
 						<div class="md-card-content large-padding">
 							<div class="uk-article">
-								<h1 class="uk-article-title">Esse omnis repellendus omnis est consequatur.</h1>
-								<p class="uk-article-meta">
-									Written by John Smith on 12 April 2016 <br>Posted in <a href="#">Blog</a>
+								<h1 class="uk-article-title" th:text="*{title}">title</h1>
+								<p class="uk-article-meta" th:inline="text">
+									由 [[*{createdBy.name}]] 于 [[*{#dates.format(publishedDate, 'yyyy-MM-dd HH:mm:ss')}]] 发布 <br />
+									[[*{author==null||author==''}?'':('作者 '+*{author})+' &nbsp; ']]类别 [[*{category.name}]]
 								</p>
-								<p class="uk-article-lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-									incididunt ut labore et dolore magna aliqua.</p>
+								<!-- <p class="uk-article-lead" th:text="*{summary}">summary</p> -->
 								<hr class="uk-article-divider">
-								<p>
-									<figure class="uk-thumbnail uk-thumbnail-large thumbnail_left">
-										<img src="http://altair_html.tzdthemes.com/assets/img/gallery/Image08.jpg" alt="">
-										<figcaption class="uk-thumbnail-caption">Some caption</figcaption>
-									</figure>
-									Et facere exercitationem facilis ipsum sed soluta reiciendis laborum ut rerum ea et ratione aut blanditiis non
-									esse explicabo omnis ut ut qui debitis quos iure in hic dolore iure numquam voluptas sed rem dolores eum ipsam
-									rerum aut perferendis laborum sit vel blanditiis rerum voluptatibus debitis nostrum occaecati qui voluptatem
-									omnis nisi suscipit itaque accusamus praesentium fugit et est ut ut nam autem tenetur cum quos qui voluptatem
-									non sed maxime voluptatibus accusantium in dolorem iusto quia alias veritatis temporibus saepe quibusdam ut
-									assumenda consequatur sit incidunt corrupti in voluptatibus dolores optio autem nemo corporis nesciunt non
-									corrupti expedita cumque saepe vero commodi est at veritatis fugiat ipsam voluptatibus quia placeat in quia quo
-									facilis autem vero consequatur fugiat repellat soluta eos beatae sint doloribus alias itaque quam ea debitis
-									minus ratione minus rerum laborum assumenda aut harum at minus aperiam voluptatem qui ut quae quam omnis quos
-									saepe natus adipisci consequuntur alias cumque laudantium numquam quia exercitationem id totam accusamus ab
-									perspiciatis id tempora esse facere aperiam quos amet impedit quia at quisquam accusantium illum quis iste
-									itaque aut quae nihil id facilis enim fugit architecto aut qui natus minima natus.
-								</p>
-								<blockquote>Voluptas ullam voluptas nulla quidem vitae sunt optio est rerum nostrum consequatur
-									molestiae consequatur inventore ab molestias quae magni ea blanditiis neque autem et dolore corporis reiciendis
-									molestiae harum quas consectetur nam ut tempore nulla et dolores id ut harum velit id totam unde sint.</blockquote>
-								<p>Placeat dolore ab porro quo a nesciunt earum corrupti voluptates saepe eligendi tempora qui numquam ut
-									rerum perspiciatis quo sequi assumenda maiores eos facilis doloremque alias molestiae laudantium qui voluptas
-									perferendis quaerat sunt error illo porro tenetur voluptatibus culpa facilis quidem dolores nam occaecati
-									doloribus sed deleniti mollitia et delectus earum rerum natus ipsa sed quam laboriosam accusantium qui
-									doloribus doloribus temporibus quos maiores autem repellendus sapiente accusamus nobis quam incidunt quia est
-									esse quaerat nam explicabo reiciendis iusto necessitatibus eum et quo deleniti id et et dicta alias dolores.</p>
-								<ul>
-									<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, maiores!</li>
-									<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto dignissimos possimus voluptates.</li>
-									<li>Lorem ipsum dolor sit amet, consectetur.</li>
-								</ul>
-								<p>Occaecati beatae repellendus asperiores vel nihil dolores fugit hic et corporis eveniet occaecati quia
-									deleniti cupiditate expedita fugit fugit ad velit molestias eos non eos distinctio ut voluptate omnis
-									cupiditate delectus exercitationem sit velit ea quo praesentium aut illum molestiae aut sunt saepe praesentium
-									dolores enim reiciendis sunt repudiandae ipsum doloremque consectetur et quis qui numquam est et assumenda et
-									aut eaque architecto tenetur sequi sed totam reiciendis nihil assumenda assumenda provident consequatur ipsa
-									nobis suscipit quaerat ullam qui ipsa aperiam dolorem atque ex voluptatum commodi optio eum neque impedit quasi
-									corrupti et et reprehenderit eos quo tenetur placeat quae ipsum tempora quas deserunt et est omnis quaerat
-									accusamus et nobis cumque eius eum et odit possimus provident voluptas et repudiandae et eveniet reiciendis vel
-									maxime aliquid ut magnam non quis praesentium et asperiores.</p>
-								<pre class="line-numbers">
-									<code class="language-javascript">// Generate parameters to create a standard animation
-function genFx( type, includeWidth ) {
-    var which,
-    i = 0,
-    attrs = { height: type };
-    // If we include width, step value is 1 to do all cssExpand values,
-    // otherwise step value is 2 to skip over Left and Right
-    includeWidth = includeWidth ? 1 : 0;
-    for ( ; i < 4 ; i += 2 - includeWidth ) {
-        which = cssExpand[ i ];
-        attrs[ "margin" + which ] = attrs[ "padding" + which ] = type;
-    }
-    if ( includeWidth ) {
-        attrs.opacity = attrs.width = type;
-    }
-    return attrs;
-}</code>
-								</pre>
+								<div th:utext="*{content}"></div>
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="uk-width-medium-1-4">
-					<h5 class="uk-margin-small-bottom uk-text-upper">Recent Posts</h5>
+					<h5 class="uk-margin-small-bottom uk-text-upper">最新提交</h5>
 					<ul class="md-list uk-margin-remove">
-						<li>
+						<li th:each="post:${recentPosts}">
 							<div class="md-list-content">
-								<span class="md-list-heading uk-text-truncate"><a href="#">Lorem ipsum dolor sit amet, consectetur
-										adipisicing</a></span> <span class="uk-text-small uk-text-muted">April 16, 2016</span>
-							</div>
-						</li>
-						<li>
-							<div class="md-list-content">
-								<span class="md-list-heading uk-text-truncate"><a href="#">Lorem ipsum dolor sit.</a></span> <span
-									class="uk-text-small uk-text-muted">April 16, 2016</span>
-							</div>
-						</li>
-						<li>
-							<div class="md-list-content">
-								<span class="md-list-heading uk-text-truncate"><a href="#">Lorem ipsum dolor sit amet.</a></span> <span
-									class="uk-text-small uk-text-muted">April 16, 2016</span>
-							</div>
-						</li>
-						<li>
-							<div class="md-list-content">
-								<span class="md-list-heading uk-text-truncate"><a href="#">Lorem ipsum dolor sit amet, consectetur
-										adipisicing elit.</a></span> <span class="uk-text-small uk-text-muted">April 16, 2016</span>
+								<span class="md-list-heading uk-text-truncate"> <a th:href="@{/p/}+${post.id}" th:text="${post.title}">title</a></span>
+								<span class="uk-text-small uk-text-muted" th:text="${#dates.format(post.publishedDate, 'yyyy-MM-dd HH:mm:ss')}">date</span>
 							</div>
 						</li>
 					</ul>
-					<h5 class="uk-margin-small-bottom uk-text-upper  uk-margin-large">Tags</h5>
+					<h5 class="uk-margin-small-bottom uk-text-upper  uk-margin-large">标签</h5>
 					<div class="blog_tags">
-						<a href="#" class="uk-badge">admin panel</a> <a href="#" class="uk-badge">backend</a> <a href="#" class="uk-badge">bower</a>
-						<a href="#" class="uk-badge">dashboard</a> <a href="#" class="uk-badge">gulp</a> <a href="#" class="uk-badge">html
-							admin</a> <a href="#" class="uk-badge uk-badge-success">material design</a> <a href="#" class="uk-badge">invoices</a>
-						<a href="#" class="uk-badge">kendo ui</a> <a href="#" class="uk-badge">less</a> <a href="#" class="uk-badge">uikit</a>
+						<a href="javascript:;" class="uk-badge" th:each="tag:${tags}" th:text="${tag.name}">tag name</a>
 					</div>
-					<h5 class="uk-margin-small-bottom uk-text-upper uk-margin-large">Top Authors</h5>
+					<h5 class="uk-margin-small-bottom uk-text-upper uk-margin-large">作者排名</h5>
 					<ul class="md-list md-list-addon uk-margin-remove">
-						<li>
+						<li th:each="author:${authors}">
 							<div class="md-list-addon-element">
-								<img class="md-user-image md-list-addon-avatar"
-									src="http://altair_html.tzdthemes.com/assets/img/avatars/avatar_02_tn.png" alt="" />
+								<img class="md-user-image md-list-addon-avatar" th:src="${author.avatar}" />
 							</div>
 							<div class="md-list-content">
-								<span class="md-list-heading">Bailey Stark</span> <span class="uk-text-small uk-text-muted"> <span
-									class="uk-margin-small-right"><i class="material-icons md-color-red-600">&#xE87D;</i> <small>30</small></span>
+								<span class="md-list-heading" th:text="${author.name}">name</span> <span class="uk-text-small uk-text-muted">
+									<span class="uk-margin-small-right"><i class="material-icons md-color-red-600">&#xE87D;</i> <small>30</small></span>
 									<span><i class="material-icons">&#xE0B9;</i> <small>284</small></span>
 								</span>
 							</div>
 						</li>
-						<li>
-							<div class="md-list-addon-element">
-								<img class="md-user-image md-list-addon-avatar"
-									src="http://altair_html.tzdthemes.com/assets/img/avatars/avatar_07_tn.png" alt="" />
-							</div>
-							<div class="md-list-content">
-								<span class="md-list-heading">Jody Koss</span> <span class="uk-text-small uk-text-muted"> <span
-									class="uk-margin-small-right"><i class="material-icons">&#xE87D;</i> <small>23</small></span> <span><i
-										class="material-icons">&#xE0B9;</i> <small>293</small></span>
-								</span>
-							</div>
-						</li>
-						<li>
-							<div class="md-list-addon-element">
-								<img class="md-user-image md-list-addon-avatar"
-									src="http://altair_html.tzdthemes.com/assets/img/avatars/avatar_06_tn.png" alt="" />
-							</div>
-							<div class="md-list-content">
-								<span class="md-list-heading">Yasmin Hansen</span> <span class="uk-text-small uk-text-muted"> <span
-									class="uk-margin-small-right"><i class="material-icons">&#xE87D;</i> <small>14</small></span> <span><i
-										class="material-icons">&#xE0B9;</i> <small>35</small></span>
-								</span>
-							</div>
-						</li>
 					</ul>
-					<h5 class="uk-margin-small-bottom uk-text-upper uk-margin-large">Categories</h5>
+					<h5 class="uk-margin-small-bottom uk-text-upper uk-margin-large">分类</h5>
 					<ul class="md-list uk-margin-remove">
-						<li>
+						<li th:each="category:${categories}">
 							<div class="md-list-content">
-								<span class="md-list-heading"><a href="#">Material Design</a></span> <span class="uk-text-small uk-text-muted">23
-									posts</span>
-							</div>
-						</li>
-						<li>
-							<div class="md-list-content">
-								<span class="md-list-heading"><a href="#">Gulp</a></span> <span class="uk-text-small uk-text-muted">8
-									posts</span>
-							</div>
-						</li>
-						<li>
-							<div class="md-list-content">
-								<span class="md-list-heading"><a href="#">Admin</a></span> <span class="uk-text-small uk-text-muted">17
-									posts</span>
-							</div>
-						</li>
-						<li>
-							<div class="md-list-content">
-								<span class="md-list-heading"><a href="#">Ux Design</a></span> <span class="uk-text-small uk-text-muted">4
-									posts</span>
+								<span class="md-list-heading"> <a href="javascript:;" th:text="${category.name}">catgory</a>
+								</span> <span class="uk-text-small uk-text-muted">23 posts</span>
 							</div>
 						</li>
 					</ul>

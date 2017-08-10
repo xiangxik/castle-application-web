@@ -28,7 +28,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class MainWebSecurityConfigBean extends WebSecurityConfigurerAdapter {
 
-	@Value("${security.skip_auth_urls?:/assets/**,/captcha**,/upload/**,/bower_components/**,/,/index}")
+	@Value("${security.skip_auth_urls?:/assets/**,/captcha**,/upload/**,/bower_components/**,/,/index,/p,/p/**,/elfinder/**}")
 	private String[] skipAuthUrls;
 
 	@Autowired

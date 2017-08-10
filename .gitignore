@@ -7,7 +7,7 @@
 *.iml
 .idea
 .DS_Store
-/src/main/webapp/upload
+/src/main/webapp/upload/
 
 # Log file
 *.log

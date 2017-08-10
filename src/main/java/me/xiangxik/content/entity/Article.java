@@ -72,6 +72,12 @@ public class Article extends DataEntity<User, Long> {
 	@Column(nullable = false)
 	private long hits = 0l;
 
+	@Column(nullable = false)
+	private int collectCount = 0;
+
+	@Column(nullable = false)
+	private int commentCount = 0;
+
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "tbl_article_to_tag")
 	@OrderBy("sortNo asc")
@@ -178,6 +184,22 @@ public class Article extends DataEntity<User, Long> {
 
 	public void setHits(long hits) {
 		this.hits = hits;
+	}
+
+	public int getCollectCount() {
+		return collectCount;
+	}
+
+	public void setCollectCount(int collectCount) {
+		this.collectCount = collectCount;
+	}
+
+	public int getCommentCount() {
+		return commentCount;
+	}
+
+	public void setCommentCount(int commentCount) {
+		this.commentCount = commentCount;
 	}
 
 	public Set<ArticleTag> getTags() {
