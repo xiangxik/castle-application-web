@@ -68,44 +68,7 @@
 
 					</div>
 				</div>
-				<div class="uk-width-medium-1-4">
-					<h5 class="uk-margin-small-bottom uk-text-upper">最新提交</h5>
-					<ul class="md-list uk-margin-remove">
-						<li th:each="post:${recentPosts}">
-							<div class="md-list-content">
-								<span class="md-list-heading uk-text-truncate"> <a th:href="@{/p/}+${post.id}" th:text="${post.title}">title</a></span>
-								<span class="uk-text-small uk-text-muted" th:text="${#dates.format(post.publishedDate, 'yyyy-MM-dd HH:mm:ss')}">date</span>
-							</div>
-						</li>
-					</ul>
-					<h5 class="uk-margin-small-bottom uk-text-upper  uk-margin-large">标签</h5>
-					<div class="blog_tags">
-						<a href="javascript:;" class="uk-badge" th:each="tag:${tags}" th:text="${tag.name}">tag name</a>
-					</div>
-					<h5 class="uk-margin-small-bottom uk-text-upper uk-margin-large">作者排名</h5>
-					<ul class="md-list md-list-addon uk-margin-remove">
-						<li th:each="author:${authors}">
-							<div class="md-list-addon-element">
-								<img class="md-user-image md-list-addon-avatar" th:src="${author.avatar}" />
-							</div>
-							<div class="md-list-content">
-								<span class="md-list-heading" th:text="${author.name}">name</span> <span class="uk-text-small uk-text-muted">
-									<span class="uk-margin-small-right"><i class="material-icons md-color-red-600">&#xE87D;</i> <small>30</small></span>
-									<span><i class="material-icons">&#xE0B9;</i> <small>284</small></span>
-								</span>
-							</div>
-						</li>
-					</ul>
-					<h5 class="uk-margin-small-bottom uk-text-upper uk-margin-large">分类</h5>
-					<ul class="md-list uk-margin-remove">
-						<li th:each="category:${categories}">
-							<div class="md-list-content">
-								<span class="md-list-heading"> <a href="javascript:;" th:text="${category.name}">catgory</a>
-								</span> <span class="uk-text-small uk-text-muted">23 posts</span>
-							</div>
-						</li>
-					</ul>
-				</div>
+				<div th:replace="/layout/right :: main"></div>
 			</div>
 		</div>
 	</div>
