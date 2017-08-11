@@ -24,6 +24,8 @@ import com.castle.security.ResultAuthenticationFailureHanlder;
 import com.castle.security.ResultAuthenticationSuccessHandler;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import me.xiangxik.user.entity.User;
+
 @Configuration
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class MainWebSecurityConfigBean extends WebSecurityConfigurerAdapter {
@@ -54,8 +56,10 @@ public class MainWebSecurityConfigBean extends WebSecurityConfigurerAdapter {
 		configurer.successHandler(new ResultAuthenticationSuccessHandler(objectMapper.getObject()))
 				.failureHandler(new ResultAuthenticationFailureHanlder(objectMapper.getObject(), messageSourceAccessor.getObject()));
 
-		ExceptionHandlingConfigurer<HttpSecurity> exceptionConfigurer = configurer.permitAll().and().authorizeRequests().antMatchers(skipAuthUrls)
-				.permitAll().anyRequest().authenticated().and().exceptionHandling();
+		ExceptionHandlingConfigurer<HttpSecurity> exceptionConfigurer = configurer.permitAll().and().authorizeRequests()
+				.antMatchers("/user/profile", "/user/profile_edit", "/user/profile_save").authenticated()
+				.antMatchers("/user/**", "/article/**", "/articleCategory/**", "/articleTag/**").hasRole(User.Type.superadmin.name())
+				.antMatchers(skipAuthUrls).permitAll().anyRequest().authenticated().and().exceptionHandling();
 		exceptionConfigurer.authenticationEntryPoint(
 				new ExceptionAuthenticationEntryPoint(new Http403ForbiddenEntryPoint(), new LoginUrlAuthenticationEntryPoint("/login")));
 		exceptionConfigurer.and().logout().logoutSuccessUrl("/login").permitAll();

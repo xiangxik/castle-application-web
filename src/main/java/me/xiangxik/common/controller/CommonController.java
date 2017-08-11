@@ -41,7 +41,8 @@ public class CommonController extends BaseController {
 	private UserService userService;
 
 	@RequestMapping(value = { "", "/", "/index" }, method = RequestMethod.GET)
-	public String show(Model model) {
+	public String show(Pageable pageable, Model model) {
+		model.addAttribute("posts", articleService.findAll(pageable));
 		return "/index";
 	}
 

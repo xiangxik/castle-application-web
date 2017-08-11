@@ -100,6 +100,10 @@ public class User extends DataEntity<User, Long> implements LogicDeleteable, Loc
 	/** 最后登录IP */
 	private String lastLoginIp;
 
+	/** 关注数 */
+	@Column(nullable = false)
+	private int followCount = 0;
+
 	public String getUsername() {
 		return username;
 	}
@@ -231,6 +235,14 @@ public class User extends DataEntity<User, Long> implements LogicDeleteable, Loc
 	@Override
 	public void markDisabled() {
 		this.disabled = true;
+	}
+
+	public int getFollowCount() {
+		return followCount;
+	}
+
+	public void setFollowCount(int followCount) {
+		this.followCount = followCount;
 	}
 
 	@Transient

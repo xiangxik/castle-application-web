@@ -5,15 +5,11 @@
 
 	<aside th:fragment="main(menu)" id="sidebar_main">
 		<div class="sidebar_main_header">
-			<div class="sidebar_logo">
-				<a th:href="@{/}" class="sSidebar_hide sidebar_logo_large"> <img class="logo_regular"
-					src="http://altair_html.tzdthemes.com/assets/img/logo_main.png" alt="" height="15" width="71" /> <img
-					class="logo_light" src="http://altair_html.tzdthemes.com/assets/img/logo_main_white.png" alt="" height="15"
-					width="71" />
-				</a> <a th:href="@{/}" class="sSidebar_show sidebar_logo_small"> <img class="logo_regular"
-					src="http://altair_html.tzdthemes.com/assets/img/logo_main_small.png" alt="" height="32" width="32" /> <img
-					class="logo_light" src="http://altair_html.tzdthemes.com/assets/img/logo_main_small_light.png" alt="" height="32"
-					width="32" />
+			<div class="sidebar_logo" style="height: auto; line-height: auto;">
+				<a th:href="@{/}" class="sSidebar_hide sidebar_logo_large"> <img th:src="@{/assets/img/logo_200.png}" alt=""
+					height="15" width="71" />
+				</a> <a th:href="@{/}" class="sSidebar_show sidebar_logo_small"> <img th:src="@{/assets/img/logo_200.png}" alt=""
+					height="32" width="32" />
 				</a>
 			</div>
 		</div>

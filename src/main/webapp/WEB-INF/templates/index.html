@@ -11,8 +11,8 @@
 <!-- Remove Tap Highlight on Windows Phone IE -->
 <meta name="msapplication-tap-highlight" content="no" />
 
-<link rel="icon" type="image/png" th:href="@{/assets/img/favicon-16x16.png}" sizes="16x16">
-<link rel="icon" type="image/png" th:href="@{/assets/img/favicon-32x32.png}" sizes="32x32">
+<link rel="icon" type="image/png" th:href="@{/assets/img/logo-16x16.png}" sizes="16x16">
+<link rel="icon" type="image/png" th:href="@{/assets/img/logo-32x32.png}" sizes="32x32">
 
 <title>首页</title>
 
@@ -44,7 +44,29 @@
 				<div class="uk-width-medium-3-4">
 					<h3 class="heading_b uk-margin-bottom">文章</h3>
 
-					<div class="blog_list uk-grid-width-medium-1-2 uk-grid-width-large-1-3" data-uk-grid="{gutter: 24}"></div>
+					<div class="blog_list uk-grid-width-medium-1-2 uk-grid-width-large-1-3" data-uk-grid="{gutter: 24}">
+
+						<div th:each="post:${posts.content}">
+							<div class="md-card">
+								<div class="md-card-content small-padding">
+									<img th:if="${post.thumbnail!=''}" th:src="${post.thumbnail}" th:alt="${post.title}" class="blog_list_teaser_image">
+									<div class="blog_list_teaser">
+										<h2 class="blog_list_teaser_title uk-text-truncate" th:text="${post.title}">title</h2>
+										<p th:text="${post.summary}"></p>
+										<span class="uk-text-muted uk-text-small" th:text="${#dates.format(post.publishedDate, 'yyyy-MM-dd HH:mm:ss')}">18.06.2016</span>
+									</div>
+									<div class="blog_list_footer">
+										<div class="blog_list_footer_info">
+											<span class="uk-margin-right"><i class="material-icons">&#xE87D;</i> <small th:text="${post.collectCount}">25</small></span> <span><i
+												class="material-icons">&#xE0B9;</i> <small  th:text="${post.commentCount}">183</small></span>
+										</div>
+										<a th:href="@{/p/}+${post.id}" class="md-btn md-btn-small md-btn-flat md-btn-flat-primary uk-float-right"> 查 看 </a>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
 				</div>
 				<div class="uk-width-medium-1-4">
 					<h5 class="uk-margin-small-bottom uk-text-upper">最新提交</h5>
@@ -112,74 +134,7 @@
 			// ie fixes
 			altair_helpers.ie_fix();
 
-			loadArticles(1);
 		});
-
-		var formatDate = function(date, fmt) {
-			if(!date) {
-				return "";
-			}
-			
-			date = new Date(date);
-			var o = { 
-				    "M+" : date.getMonth()+1,                 // 月份
-				    "d+" : date.getDate(),                    // 日
-				    "h+" : date.getHours(),                   // 小时
-				    "m+" : date.getMinutes(),                 // 分
-				    "s+" : date.getSeconds(),                 // 秒
-				    "q+" : Math.floor((date.getMonth()+3)/3), // 季度
-				    "S"  : date.getMilliseconds()             // 毫秒
-				  }; 
-				  if(/(y+)/.test(fmt)) 
-				    fmt=fmt.replace(RegExp.$1, (date.getFullYear()+"").substr(4 - RegExp.$1.length)); 
-				  for(var k in o) 
-				    if(new RegExp("("+ k +")").test(fmt)) 
-				  fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length))); 
-				  return fmt; 
-		}
-		var createArticleHtml = function(article) {
-			var $div = $("<div />");
-			var $divCard = $("<div class=\"md-card\" />");
-			var $divCardContent = $("<div class=\"md-card-content small-padding\" />");
-			var $divTeaser = $("<div class=\"blog_list_teaser\" />");
-			var $h2Teaser = $("<h2 class=\"blog_list_teaser_title uk-text-truncate\">" + article.title + "</h2>");
-			var $pTeaser = $("<p>" + article.summary + "</p>");
-			var $spanTeaser = $("<span class=\"uk-text-muted uk-text-small\">"+formatDate(article.publishedDate, "yyyy-MM-dd hh:mm:ss")+"</span>");
-			var $divFooter = $("<div class=\"blog_list_footer\" />");
-			var $divFooterInfo = $("<div class=\"blog_list_footer_info\" />");
-			var $spanCollect = $("<span class=\"uk-margin-right\"><i class=\"material-icons\">&#xE87D;</i> <small>" + article.collectCount
-					+ "</small></span>");
-			var $spanComment = $("<span><i class=\"material-icons\">&#xE0B9;</i> <small>" + article.commentCount + "</small></span>");
-			var $linkFooterInfo = $("<a href=\""+base+"/p/"+article.id+"\" class=\"md-btn md-btn-small md-btn-flat md-btn-flat-primary uk-float-right\"> 查 看 </a>");
-			$div.append($divCard);
-			$divCard.append($divCardContent);
-			if (article.thumbnail || article.thumbnail != "") {
-				var $img = $("<img class=\"blog_list_teaser_image\" />");
-				$img.attr("src", article.thumbnail);
-				$divCardContent.append($img);
-			}
-			$divCardContent.append($divTeaser);
-			$divCardContent.append($divFooter);
-			$divTeaser.append($h2Teaser);
-			$divTeaser.append($pTeaser);
-			$divTeaser.append($spanTeaser);
-			$divFooter.append($divFooterInfo);
-			$divFooter.append($linkFooterInfo);
-			$divFooterInfo.append($spanCollect);
-			$divFooterInfo.append($spanComment);
-			return $div;
-		}
-
-		var $blogList = $(".blog_list");
-		var loadArticles = function(page) {
-			$.post(base + "/p", {
-				page : page
-			}, function(resp) {
-				$.each(resp.rows, function(i, row) {
-					$blogList.append(createArticleHtml(row));
-				});
-			})
-		}
 	</script>
 </body>
 </html>

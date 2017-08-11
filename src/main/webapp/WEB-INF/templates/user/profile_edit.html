@@ -44,7 +44,7 @@
 	<div id="page_content">
 		<div id="page_content_inner">
 
-			<form th:action="@{/user/save}" class="uk-form-stacked" id="main_form" th:object="${entity}" method="post">
+			<form th:action="@{/user/profile_save}" class="uk-form-stacked" id="main_form" th:object="${entity}" method="post">
 				<input type="hidden" th:field="*{id}" />
 				<div class="uk-grid" data-uk-grid-margin>
 					<div class="uk-width-large-7-10">
@@ -493,16 +493,16 @@
 							<div class="md-card-content">
 								<h3 class="heading_c uk-margin-medium-bottom">其他设置</h3>
 								<div class="uk-form-row">
-									<input type="checkbox" data-switchery th:field="*{disabled}" id="input_disabled" /> <label
+									<input type="checkbox" data-switchery th:field="*{disabled}" id="input_disabled" disabled="disabled" /> <label
 										for="input_disabled" class="inline-label">禁用</label>
 								</div>
 								<div class="uk-form-row">
-									<input type="checkbox" data-switchery th:field="*{locked}" id="input_locked" /> <label for="input_locked"
+									<input type="checkbox" data-switchery th:field="*{locked}" id="input_locked" disabled="disabled" /> <label for="input_locked"
 										class="inline-label">锁定</label>
 								</div>
 								<hr class="md-hr">
 								<div class="uk-form-row">
-									<label class="uk-form-label" for="input_type">用户类型</label> <select id="input_type" data-md-selectize
+									<label class="uk-form-label" for="input_type">用户类型</label> <select disabled="disabled" id="input_type" data-md-selectize
 										th:field="*{type}">
 										<option value="admin">管理员</option>
 										<option value="superadmin">超级管理员</option>

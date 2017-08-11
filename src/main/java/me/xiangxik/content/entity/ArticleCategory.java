@@ -1,5 +1,6 @@
 package me.xiangxik.content.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -15,12 +16,23 @@ public class ArticleCategory extends HierarchicalEntity<User, Long, ArticleCateg
 
 	private String name;
 
+	@Column(nullable = false)
+	private int articleCount = 0;
+
 	public String getName() {
 		return name;
 	}
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public int getArticleCount() {
+		return articleCount;
+	}
+
+	public void setArticleCount(int articleCount) {
+		this.articleCount = articleCount;
 	}
 
 }

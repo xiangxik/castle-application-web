@@ -1,5 +1,7 @@
 package me.xiangxik.user.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -8,10 +10,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.castle.core.CastleConstants;
+import com.castle.repo.domain.Result;
 import com.castle.security.CurrentUser;
 import com.google.common.base.Strings;
 import com.querydsl.core.types.Predicate;
@@ -67,6 +72,21 @@ public class UserController extends EntityController<User, Long> {
 	public String profileEdit(@CurrentUser User user, Model model) {
 		model.addAttribute("entity", user);
 		return getBaseTemplatePath() + "/profile_edit";
+	}
+
+	@RequestMapping(value = "/profile_save", method = RequestMethod.POST, params = { "!type", "!deleted", "!locked", "!disabled" })
+	@ResponseBody
+	public Result doProfileSave(@ModelAttribute @Valid User entity, BindingResult bindingResult) {
+		onValidate(entity, bindingResult);
+		if (bindingResult.hasErrors()) {
+			return Result.validateError().error(bindingResult.getAllErrors());
+		}
+
+		onBeforeSave(entity);
+		getService().save(entity);
+		onAfterSave(entity);
+
+		return Result.success();
 	}
 
 }

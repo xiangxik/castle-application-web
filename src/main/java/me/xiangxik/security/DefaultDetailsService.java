@@ -28,7 +28,7 @@ public class DefaultDetailsService implements UserDetailsService {
 		}
 
 		return new CurrentUserDetails(user.getId(), user.getUsername(), user.getPassword(), true, true, true, true,
-				AuthorityUtils.createAuthorityList("ROLE_USER"));
+				AuthorityUtils.createAuthorityList("ROLE_" + user.getType().name()));
 	}
 
 	public class CurrentUserDetails extends CustomUserDetails<Long, User> {
