@@ -1,0 +1,59 @@
+body {
+	font-size: 12px;
+}
+
+header>.uk-navbar-container.uk-navbar {
+	background: #1976d2 none repeat scroll 0 0;
+	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+	height: 48px;
+}
+
+header .uk-navbar-item, .uk-navbar-nav>li>a, .uk-navbar-toggle {
+	height: 48px;
+	color: #fff;
+}
+
+.tm-sidebar-left {
+	border-right: 1px solid #e5e5e5;
+	bottom: 0;
+	box-sizing: border-box;
+	overflow: auto;
+	padding: 20px 20px 30px;
+	position: fixed;
+	top: 48px;
+	width: 180px;
+}
+
+.uk-logo {
+	width: 180px;
+}
+
+.uk-navbar .uk-logo:focus, .uk-navbar .uk-logo:hover {
+	color: #fff;
+}
+
+.uk-navbar-nav > li:hover > a, .uk-navbar-nav > li > a.uk-open, .uk-navbar-nav > li > a:focus {
+	color: #fff;
+}
+
+@media ( min-width : 960px) {
+	#page_content {
+		margin-left: 180px;
+	}
+}
+
+#page_content_inner {
+	padding: 24px 24px 100px;
+}
+
+#footer {
+	background: #fff none repeat scroll 0 0;
+	border-top: 1px solid rgba(0, 0, 0, 0.12);
+	bottom: 0;
+	left: 0;
+	line-height: 32px;
+	padding: 0 25px;
+	position: fixed;
+	right: 0;
+	text-align: center;
+}

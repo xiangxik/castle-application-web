@@ -45,6 +45,11 @@ public class CommonController extends BaseController {
 		model.addAttribute("posts", articleService.findAll(pageable));
 		return "/index";
 	}
+	
+	@RequestMapping(value = "/index2", method = RequestMethod.GET)
+	public String show2(Pageable pageable, Model model) {
+		return "/index2";
+	}
 
 	@RequestMapping(value = "/p/{id}", method = RequestMethod.GET)
 	public String detailPage(@PathVariable("id") Article article, Model model) {

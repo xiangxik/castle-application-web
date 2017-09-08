@@ -1,0 +1,170 @@
+<!doctype html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html>
+<head>
+<!-- UIkit CSS -->
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.28/css/uikit.min.css" />
+<link rel="stylesheet" th:href="@{/assets/css/index2.css}" />
+
+<!-- jQuery is required -->
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- UIkit JS -->
+<script src="http://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.28/js/uikit.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.28/js/uikit-icons.min.js"></script>
+<script type="text/javascript">
+	function toggleFullScreen() {
+		if (!document.fullscreenElement && // alternative standard method
+		!document.mozFullScreenElement && !document.webkitFullscreenElement) {// current working methods
+			if (document.documentElement.requestFullscreen) {
+				document.documentElement.requestFullscreen();
+			} else if (document.documentElement.mozRequestFullScreen) {
+				document.documentElement.mozRequestFullScreen();
+			} else if (document.documentElement.webkitRequestFullscreen) {
+				document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+			}
+		} else {
+			if (document.cancelFullScreen) {
+				document.cancelFullScreen();
+			} else if (document.mozCancelFullScreen) {
+				document.mozCancelFullScreen();
+			} else if (document.webkitCancelFullScreen) {
+				document.webkitCancelFullScreen();
+			}
+		}
+	}
+</script>
+</head>
+<body>
+	<header uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky; bottom: #transparent-sticky-navbar">
+		<nav class="uk-navbar-container" uk-navbar>
+
+			<div class="uk-navbar-left">
+				<a class="uk-navbar-item uk-logo" href="../"><span uk-icon="icon: tripadvisor; ratio: 3"></span></a>
+			</div>
+
+			<div class="uk-navbar-right uk-hidden@m">
+				<a class="uk-navbar-toggle" href="#offcanvas-nav" uk-toggle uk-navbar-toggle-icon></a>
+				<div id="offcanvas-usage" uk-offcanvas>
+					<div id="offcanvas-nav" uk-offcanvas="overlay: true">
+						<div class="uk-offcanvas-bar">
+							<ul class="uk-nav uk-nav-default">
+								<li class="uk-active"><a href="#">Active</a></li>
+								<li class="uk-parent"><a href="#">Parent</a>
+									<ul class="uk-nav-sub">
+										<li><a href="#">Sub item</a></li>
+										<li><a href="#">Sub item</a></li>
+									</ul></li>
+								<li class="uk-nav-header">Header</li>
+								<li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: table"></span> Item</a></li>
+								<li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: thumbnails"></span> Item</a></li>
+								<li class="uk-nav-divider"></li>
+								<li><a href="#"><span class="uk-margin-small-right" uk-icon="icon: trash"></span> Item</a></li>
+							</ul>
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="uk-navbar-right uk-visible@m">
+				<ul class="uk-navbar-nav">
+					<li><a href="javascript:;" onclick="toggleFullScreen();">全屏</a></li>
+				</ul>
+			</div>
+		</nav>
+	</header>
+
+	<aside class="tm-sidebar-left uk-visible@m">
+		<h4>Documentation</h4>
+		<ul class="uk-nav uk-nav-default">
+			<li class="uk-active"><a href="#">Active</a></li>
+			<li class="uk-parent"><a href="#">Parent</a>
+				<ul class="uk-nav-sub">
+					<li><a href="#">Sub item</a></li>
+					<li><a href="#">Sub item</a>
+						<ul>
+							<li><a href="#">Sub item</a></li>
+							<li><a href="#">Sub item</a></li>
+						</ul></li>
+				</ul></li>
+		</ul>
+	</aside>
+
+	<div id="page_content">
+
+		<div id="page_content_inner">
+
+			<ul class="uk-breadcrumb">
+				<li><a href="#">Item</a></li>
+				<li><a href="#">Item</a></li>
+				<li class="uk-disabled"><a href="#">Disabled</a></li>
+				<li><span href="#">Active</span></li>
+			</ul>
+
+			<form class="uk-form-stacked">
+
+				<div class="uk-margin">
+					<label class="uk-form-label" for="form-stacked-text">Text</label>
+					<div class="uk-form-controls">
+						<input class="uk-input" id="form-stacked-text" type="text" placeholder="Some text...">
+					</div>
+				</div>
+
+				<div class="uk-margin">
+					<label class="uk-form-label" for="form-stacked-select">Select</label>
+					<div class="uk-form-controls">
+						<select class="uk-select" id="form-stacked-select">
+							<option>Option 01</option>
+							<option>Option 02</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="uk-margin">
+					<div class="uk-form-label">Radio</div>
+					<div class="uk-form-controls">
+						<label><input class="uk-radio" type="radio" name="radio1"> Option 01</label><br> <label><input
+							class="uk-radio" type="radio" name="radio1"> Option 02</label>
+					</div>
+				</div>
+
+			</form>
+
+
+			<table class="uk-table uk-table-middle uk-table-small uk-table-divider">
+				<thead>
+					<tr>
+						<th class="uk-width-small">Table Heading</th>
+						<th>Table Heading</th>
+						<th>Table Heading</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Table Data</td>
+						<td>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+							dolore magna aliqua.</td>
+						<td><button class="uk-button uk-button-small" type="button">Button</button></td>
+					</tr>
+					<tr>
+						<td>Table Data</td>
+						<td>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+							dolore magna aliqua.</td>
+						<td><button class="uk-button uk-button-small" type="button">Button</button></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<footer id="footer">
+		&copy; 2015-
+		<script>
+			document.write(new Date().getFullYear())
+		</script>
+		2017 <a href="http://www.whenling.com">当凌科技</a>, 保留所有权利.
+	</footer>
+
+</body>
+</html>
